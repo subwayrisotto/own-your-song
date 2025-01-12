@@ -1,5 +1,18 @@
+
+@import "./_mixins.scss";
+@import "./colors.scss";
+
 *, *::after, *::before{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
+
+
+
+
+a{
+    text-decoration: none;
+    // color: $color-white;
+}
+

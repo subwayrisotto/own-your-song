@@ -1,0 +1,26 @@
+@mixin headerText{
+    font-weight: 900;
+    font-size: 50px;
+    line-height: 45px;
+    text-align: center;
+    background: linear-gradient(180deg, #FFFFFF 0%, #999999 36.11%);
+    -webkit-background-clip: text; 
+    background-clip: text; 
+    color: transparent; 
+}
+
+@mixin textNavigationStyling{
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 19.36px;
+}
+
+@mixin textStyling{
+    font-size: 21px;
+    font-weight: 500;
+    line-height: 22.47px;
+    color: $color-white;
+}
+
+
+@import "./colors.scss";
