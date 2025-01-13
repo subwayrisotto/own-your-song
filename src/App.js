@@ -1,5 +1,5 @@
 import './App.css';
-import NavigationComponents from './components/NavigationComponenet/NavigationComponents';
+import NavigationComponents from './components/NavigationComponent/NavigationComponents';
 import { Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import AboutUs from './pages/about-us/AboutUs';

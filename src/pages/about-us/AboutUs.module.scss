@@ -5,12 +5,11 @@
 }
 
 .container{
-    background-image: url('../../../public/about-us/bg1.png');
-    background-size: cover; 
+    background-image: url('../../assets/about-us/bg.png');
+    background-size: 100vw auto; 
     background-position: center center; 
     background-repeat: no-repeat; 
     width: 100%;
-    height: 100%;
 }
 
 .ctn{
@@ -29,5 +28,18 @@
 }
 
 .achievenements{
+    padding-top: 70px;
+}
+
+.achievmentsCtn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    padding-top: 71px;
+}
+
+.coreValues{
     padding-top: 70px;
 }

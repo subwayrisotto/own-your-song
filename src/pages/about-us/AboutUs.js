@@ -1,5 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './AboutUs.module.scss';
+import achievenements from '../../data/achievments';
+import coreValues from '../../data/core-values';
+import CardAchievenementsComponent from '../../components/CardAchievenementsComponent/CardAchievenementsComponent';
+import CardCoreValueComponent from '../../components/CardCoreValuesComponent/CardCoreValueComponent';
 
 function AboutUs() {
   return (
@@ -16,6 +20,22 @@ function AboutUs() {
 
         <div className={styles.achievenements}>
           <p className={styles.headerText}>Our Achievements</p>
+
+          <div className={styles.achievmentsCtn}>
+            {achievenements.map((achievment, index) => (
+                <CardAchievenementsComponent header={achievment.value} text={achievment.text} key={index}/>
+            ))}
+          </div>
+        </div>
+
+        <div className={styles.coreValues}>
+          <p className={styles.headerText}>Our Core Values</p>
+
+          <div className={styles.coreValuesCtn}>
+            {coreValues.map((coreValue, index) => (
+                <CardCoreValueComponent header={coreValue.header} text={coreValue.text} key={index}/>
+            ))}
+          </div>
         </div>
       </div>
     </div>

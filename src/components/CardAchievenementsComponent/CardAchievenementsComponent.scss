@@ -1,0 +1,43 @@
+
+@use "../../styles/mixins.scss";
+@import "../../styles/colors.scss";
+
+.card {
+  background: rgba(86, 11, 173, 1); 
+  box-shadow: 
+    -12.43px 12.43px 12.43px rgba(255, 255, 255, 0.145) inset, 
+    12.43px -12.43px 12.43px rgba(101, 8, 163, 0.145) inset; 
+  backdrop-filter: blur(24.87px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  max-width: 252px;
+  width: 100%;
+  aspect-ratio: 2 / 1; 
+  border-radius: 11px;
+  cursor: pointer;
+  
+  &:hover{
+    transform: translateY(-10px); 
+    box-shadow: 
+    -12.43px 12.43px 12.43px rgba(255, 255, 255, 0.145) inset, 
+    12.43px -12.43px 12.43px rgba(101, 8, 163, 0.145) inset,
+      0 10px 15px rgba(0, 0, 0, 0.2), 
+      0 25px 40px rgba(156, 39, 176, 0.6),
+      0 0 20px rgba(186, 85, 211, 0.5); 
+  }
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.header{
+  @include mixins.headerText;
+}
+
+.text{
+  @include mixins.textStyling;
+  font-family: "Akatab", sans-serif;
+  text-align: center;
+  padding-top: 5px;
+}

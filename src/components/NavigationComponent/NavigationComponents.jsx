@@ -1,6 +1,7 @@
 import React from 'react';
-import styles from './NavigationComponenets.module.scss';
+import styles from './NavigationComponents.module.scss';
 import navigation from '../../data/navigation';
+import logo from '../../assets/logo.svg'; 
 import { Link } from 'react-router-dom'
 
 function NavigationComponents() {
@@ -8,7 +9,9 @@ function NavigationComponents() {
         <div className={styles.navContainer}>
             <nav className={styles.nav}>
                 <div className={styles.logo}>
-                    <Link to="/">OWNYOURSONG</Link>
+                    <Link to="/">
+                        <img src={logo} alt="Own Your S" />
+                    </Link>
                 </div>
 
                 <ul className={styles.navList}>

@@ -1,0 +1,78 @@
+@use "../../styles/mixins.scss";
+@import "../../styles/colors.scss";
+
+.navContainer{
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
+  font-family: "Inter", sans-serif;
+}
+
+.nav {
+  max-width: 1158px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  top: 37px;
+  left: 50%;
+  transform: translateX(-50%);
+  // margin-top: 37px;
+  padding: 15px  35px 10px 15px;
+  border-radius: 25px; 
+  border: 1px solid $color-purple;
+  background-color: transparent;
+}
+
+.navList{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  list-style-type: none;
+}
+
+.navListItem{
+  @include mixins.textNavigationStyling;
+  a{
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+
+    &:hover{
+      color: $color-pink;
+    }
+
+    &::after{
+      content: '';
+      position: absolute;
+      width: 100%;
+      transform: scaleX(0);
+      height: 2px;
+      bottom: -2px ;
+      left: 0;
+      background-color: $color-pink;
+      transform-origin: bottom right;
+      transition: transform .25s ease-out;
+    }
+
+    &:hover::after{
+      transform: scaleX(1);
+      transform-origin: bottom left;
+    }
+  }
+}
+
+.logo{
+  width: 53px;
+  height: 58px;
+  & img{
+    width: 100%;
+    height: 100%;
+  }
+}
+
+
+                
