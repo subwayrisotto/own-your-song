@@ -1,16 +1,37 @@
 {
   "files": {
-    "main.css": "/own-your-song/static/css/main.4382d086.css",
-    "main.js": "/own-your-song/static/js/main.1c2e559a.js",
+    "main.css": "/own-your-song/static/css/main.48fa17dc.css",
+    "main.js": "/own-your-song/static/js/main.3e382016.js",
     "static/js/488.29af69cf.chunk.js": "/own-your-song/static/js/488.29af69cf.chunk.js",
-    "static/media/bg1.png": "/own-your-song/static/media/bg1.040bf59b82f1bdc8bb77.png",
+    "static/media/bg.png": "/own-your-song/static/media/bg.ded42ce02e84bbc731cb.png",
+    "static/media/logo.svg": "/own-your-song/static/media/logo.64d29f64026e22a9031eb45368fd6ba2.svg",
+    "static/media/Inter-Regular.woff": "/own-your-song/static/media/Inter-Regular.a252fc44cf11fd602874.woff",
+    "static/media/step3.png": "/own-your-song/static/media/step3.809b99ab0679d796cf96.png",
+    "static/media/Jessica.png": "/own-your-song/static/media/Jessica.97c757565249722fb44e.png",
+    "static/media/Sarah.png": "/own-your-song/static/media/Sarah.190fbd0e74feb94cd273.png",
+    "static/media/Tom.png": "/own-your-song/static/media/Tom.847cc23dc5507a5cde6d.png",
+    "static/media/Akatab-Bold.woff": "/own-your-song/static/media/Akatab-Bold.7907fee3e57a8b4d46c9.woff",
+    "static/media/Akatab-Regular.woff": "/own-your-song/static/media/Akatab-Regular.77c5aaca808d273922d1.woff",
+    "static/media/AfacadMedium.woff": "/own-your-song/static/media/AfacadMedium.23bd250e3055d9faca32.woff",
+    "static/media/Max.png": "/own-your-song/static/media/Max.b122041d092792d385ba.png",
+    "static/media/AfacadRegular.woff": "/own-your-song/static/media/AfacadRegular.2b1c1b0000bec4529a1b.woff",
+    "static/media/step2.png": "/own-your-song/static/media/step2.64998972a3f86113b129.png",
+    "static/media/PantonNarrow-Trial-Black.woff": "/own-your-song/static/media/PantonNarrow-Trial-Black.3c859d7bcd73c0e353a6.woff",
+    "static/media/AfacadMedium.woff2": "/own-your-song/static/media/AfacadMedium.d3dcc33a3cf479816ee2.woff2",
+    "static/media/AfacadRegular.woff2": "/own-your-song/static/media/AfacadRegular.cb95aa85e1a0a8cd6756.woff2",
+    "static/media/PantonNarrow-Trial-Black.woff2": "/own-your-song/static/media/PantonNarrow-Trial-Black.d398cca903bb69c54fce.woff2",
+    "static/media/step1.png": "/own-your-song/static/media/step1.19bcf2c6cda6600ed24f.png",
+    "static/media/instagram.svg": "/own-your-song/static/media/instagram.9cecf1be14119c1ad483ee0a1060b80c.svg",
+    "static/media/telegram.svg": "/own-your-song/static/media/telegram.c5d1ba62828fd16e0401a7b6ecf4b752.svg",
+    "static/media/youtube.svg": "/own-your-song/static/media/youtube.9b8ccaaec45bd55a125fd321abba0684.svg",
     "index.html": "/own-your-song/index.html",
-    "main.4382d086.css.map": "/own-your-song/static/css/main.4382d086.css.map",
-    "main.1c2e559a.js.map": "/own-your-song/static/js/main.1c2e559a.js.map",
+    "static/media/star.svg": "/own-your-song/static/media/star.114184eb31ea2b16546c98945b7765f4.svg",
+    "main.48fa17dc.css.map": "/own-your-song/static/css/main.48fa17dc.css.map",
+    "main.3e382016.js.map": "/own-your-song/static/js/main.3e382016.js.map",
     "488.29af69cf.chunk.js.map": "/own-your-song/static/js/488.29af69cf.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.4382d086.css",
-    "static/js/main.1c2e559a.js"
+    "static/css/main.48fa17dc.css",
+    "static/js/main.3e382016.js"
   ]
 }
