@@ -1,20 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import styles from './CardComponent.module.scss';
+import styles from './CardAchievementsComponent.module.scss';
 
-function CardAchievenementsComponent(props) {
-    const { header, text } = props;
+function CardAchievementsComponent(props) {
+    const { value, text } = props;
     const [count, setCount] = useState(0);
 
     useEffect(() => {
         let start = 0;
-        const end = header; 
         const duration = 2000; 
-        const increment = end / (duration / 50); 
+        const increment = value / (duration / 50); 
     
         const timer = setInterval(() => {
         start += increment; 
-        if (start >= end) {
-            setCount(end); 
+        if (start >= value) {
+            setCount(value); 
             clearInterval(timer);
         } else {
             setCount(Math.round(start)); 
@@ -32,4 +31,4 @@ function CardAchievenementsComponent(props) {
     )
 }
 
-export default CardAchievenementsComponent
+export default CardAchievementsComponent

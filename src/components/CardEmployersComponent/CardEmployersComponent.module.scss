@@ -1,0 +1,57 @@
+
+@use "../../styles/mixins.scss";
+@import "../../styles/colors.scss";
+
+.card {
+  background: rgba(86, 11, 173, 0.11);
+  box-shadow: -17px 17px 21.9px -9px rgba(0, 0, 0, 0.25);
+  max-width: 265px;
+  height: 365px;
+  width: 100%;
+  border-radius: 32px;
+  padding: 25px 25px 50px 25px ;
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.avatar{
+  width: 177px;
+  height: 177px;
+  aspect-ratio: 1 / 1;
+}
+
+.name{
+  font-family: 'Inter';
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 28.8px;
+  text-align: center;
+  color: $color-white;
+  padding-top: 11px;
+}
+
+.position{
+  font-family: 'Inter';
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 12.6px;
+  text-align: center; 
+  color: $color-white;
+  padding-top: 11px;
+}
+
+.responsibilities{
+  max-width: 214px;
+  width: 100%;
+  font-family: 'Inter';
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 14.4px;
+  text-align: center;
+  color: $color-white;
+  padding-top: 11px;
+}

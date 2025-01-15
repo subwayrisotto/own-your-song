@@ -1,4 +1,4 @@
-const achievenements = [
+const achievements = [
     {
         id: 1, 
         value: 1500,
@@ -21,4 +21,4 @@ const achievenements = [
     }
 ];
 
-export default achievenements;
+export default achievements;

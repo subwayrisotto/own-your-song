@@ -2,9 +2,11 @@ import React from 'react';
 import styles from './NavigationComponents.module.scss';
 import navigation from '../../data/navigation';
 import logo from '../../assets/logo.svg'; 
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 function NavigationComponents() {
+    let location = useLocation(); 
+    
     return (
         <div className={styles.navContainer}>
             <nav className={styles.nav}>
@@ -18,7 +20,11 @@ function NavigationComponents() {
                     {
                         navigation.map((nav, index) => {
                             return( 
-                                <li key={index} className={styles.navListItem}>
+                                <li key={index} className={
+                                    nav.navigateTo === location.pathname 
+                                        ? styles.navListItem + " " + styles.active
+                                        : styles.navListItem
+                                }>
                                     <Link to={nav.navigateTo}>{nav.name}</Link>
                                 </li>
                             )

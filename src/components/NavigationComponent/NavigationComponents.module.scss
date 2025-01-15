@@ -74,5 +74,21 @@
   }
 }
 
+.active a{
+  color: $color-pink;
+  
+  &::after{
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(1);
+    height: 2px;
+    bottom: -2px ;
+    left: 0;
+    background-color: $color-pink;
+    transform-origin: bottom left;
+    transition: transform .25s ease-out;
+  }
+}
 
                 
