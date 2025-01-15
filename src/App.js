@@ -14,7 +14,7 @@ function App() {
       <NavigationComponents />
 
       <Routes>
-        <Route path='/own-your-song' element={<Home />} />
+        <Route path='/' element={<Home />} />
         <Route path='/about-us' element={<AboutUs />} />
         <Route path='/contact' element={<Contact />} />
         <Route path='/enterpise' element={<Enterpise />} />
