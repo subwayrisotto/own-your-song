@@ -9,11 +9,46 @@
     box-sizing: border-box;
 }
 
-
-
-
 a{
     text-decoration: none;
     color: $color-white;
+}
+
+.slick-list{
+    padding: 0 66px!important;
+}
+
+.slick-next{
+    right: -40px!important;
+}
+
+.slick-prev{
+    left: -40px!important;
+}
+
+.slick-dots{
+    bottom: -35px!important;
+    li{
+        button{
+            &:before{
+                content: ''!important;
+                color: $color-white!important;
+            }
+            width: 10px!important;
+            height: 10px!important;
+            background-color: $color-white!important;
+            border-radius: 50%;
+        }
+    
+        &.slick-active{
+            button{
+                background-color: $color-pink!important;
+                &:before{
+                    content: ''!important;
+                    color: $color-pink!important;
+                }
+            }
+        }
+    }
 }
 

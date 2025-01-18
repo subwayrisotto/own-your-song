@@ -1,0 +1,102 @@
+@use "../../styles/mixins.scss";
+@import "../../styles/colors.scss";
+
+.headerText{
+    @include mixins.headerText;
+    text-align: left;
+    text-transform: uppercase;
+    font-family: 'Panton';
+    font-size: 64px;
+    font-weight: 400;
+    line-height: 66.8px;
+
+}
+
+.container{
+    background-image: url('../../assets/home/bg.png');
+    background-size: 100% 100%; 
+    // background-size: cover;
+    background-position: center center; 
+    background-repeat: no-repeat; 
+    width: 100%;
+    padding-bottom: 100px;
+}
+
+.ctn{
+    max-width: 1440px;
+    width: 100%;
+    margin: 0 auto;
+    padding-top: 200px;
+}
+
+.text{
+    max-width: 600px;
+    width: 100%;
+    font-family: 'Afacad';
+    font-size: 36px;
+    font-weight: 500;
+    line-height: 48px;
+    text-align: left;
+    color: $color-white;
+}
+
+.buttonsContainer{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 30px;
+    margin-top: 30px;
+}
+
+#button{
+    width: 216px;
+    height: 73px;
+    outline: none;
+    border-radius: 32px;
+    border: 1px solid $color-purple;
+    background-color: transparent;
+    cursor: pointer;
+
+    &.filledButton{
+        background: linear-gradient(90deg, #850AD6 2.09%, #560BAD 99.79%);
+        backdrop-filter: blur(18.53333282470703px);
+        box-shadow: -9.27px 9.27px 9.27px -5px rgba(255, 255, 255, 0.1), 0px 0px 8px 1px rgba(86, 11, 173, 1);
+        transition: transform .5s ease-out;
+
+        &:hover{
+            background: transparent;
+            backdrop-filter: blur(0);
+            box-shadow: none;
+            transform: scale(.9);
+        }
+    }
+
+    &.outlinedButton{
+        transition: transform .5s ease-out;
+
+        &:hover{
+            background: linear-gradient(90deg, #850AD6 2.09%, #560BAD 99.79%);
+            backdrop-filter: blur(18.53333282470703px);
+            box-shadow: -9.27px 9.27px 9.27px -5px rgba(255, 255, 255, 0.1), 0px 0px 8px 1px rgba(86, 11, 173, 1);
+            transform: scale(.9);
+        }
+    }
+
+    .buttonText{
+        font-family: 'Inter';
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 23px;
+        text-align: center;
+        background: linear-gradient(180deg, #FFFFFF 0%, #999999 96.11%);
+        -webkit-background-clip: text; 
+        background-clip: text; 
+        color: transparent; 
+    }
+}
+
+.welcomeCtn{
+    max-width: 1158px;
+    width: 100%;
+    margin: 0 auto;
+}

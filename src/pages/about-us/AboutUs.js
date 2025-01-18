@@ -12,8 +12,8 @@ import horizontalLine from '../../assets/about-us/horizontal-line.png';
 import step1 from '../../assets/about-us/step1.png';
 import step2 from '../../assets/about-us/step2.png';
 import step3 from '../../assets/about-us/step3.png';
-import CardOpinionComponent from '../../components/CardOpinionComponent/CardOpinionComponent';
 import opinions from '../../data/opinions';
+import SliderComponent from '../../components/SliderComponent/SliderComponent';
 
 const stepsImages = [
   step1, step2, step3
@@ -99,9 +99,7 @@ function AboutUs() {
           <p className={styles.headerText}>What Our Clients Say</p>
 
           <div className={styles.clientsOpinionCtn + " " + styles.paddingTop}>
-            {opinions.map((opinion, index) => (
-                <CardOpinionComponent {...opinion} key={index}/>
-            ))}
+            <SliderComponent {...opinions} />
           </div>
         </div>
       </div>
