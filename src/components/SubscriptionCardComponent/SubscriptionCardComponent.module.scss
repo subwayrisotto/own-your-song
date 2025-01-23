@@ -1,0 +1,105 @@
+@use "../../styles/mixins.scss";
+@import "../../styles/colors.scss";
+
+.subCardContainer{
+    width: 346px;
+    height: 447px;
+    cursor: pointer;
+    perspective: 1000px;
+
+    &:hover .subCard{
+        transform: rotateY(180deg);
+    }
+}
+
+.subCard{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transition: transform 1s;
+    transform-style: preserve-3d;
+}
+
+.subCardFront, .subCardBack{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(133, 10, 214, 0.52) 0%, rgba(72, 12, 168, 0.52) 100%);
+    box-shadow: 
+      -24.13px 24.13px 24.13px 0px rgba(255, 255, 255, 0.097) inset, 
+      24.13px -24.13px 24.13px 0px rgba(165, 165, 165, 0.097) inset;
+    backdrop-filter: blur(92.67px);
+    border-radius: 25px;
+    backface-visibility: hidden;
+}
+
+.subCardFront{
+    z-index: 1;
+}
+
+.subCardBack{
+    transform: rotateY(180deg);
+}
+
+.subImageCtn{
+    width: 262px;
+    aspect-ratio: 1 / 1;
+    background: linear-gradient(180deg, rgba(133, 10, 214, 0.52) 0%, rgba(72, 12, 168, 0.52) 100%);
+    box-shadow: 
+    -24.13px 24.13px 24.13px 0px rgba(255, 255, 255, 0.097) inset,
+    24.13px -24.13px 24.13px 0px rgba(165, 165, 165, 0.097) inset;
+    backdrop-filter: blur(92.6719970703125px);
+    border-radius: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 40px 40px 20px 40px;
+}
+
+.subPlanCtn{
+    padding: 10px 10px 20px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row
+}
+
+.subPlanText{
+    @include mixins.headerText;
+    font-size: 26px;
+    font-weight: 600;
+    line-height: 23.4px;
+}
+
+.line{
+    width: 73px;
+    height: 3px;
+
+    &.lineLeft{
+        background: linear-gradient(90deg, #6B5078 0%, #C693DE 50.5%,#FFFFFF 100%);
+    }
+
+    &.lineRight{
+        background: linear-gradient(90deg, #FFFFFF 0%, #C693DE 50.5%, #6B5078 100%);
+    }
+}
+
+.subPriceCtn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @include mixins.headerText;
+    font-size: 40px;
+    font-weight: 600;
+    line-height: 45.4px;
+}
+
+.subDescriptionCtn{
+    font-family: 'Inter';
+    text-align: left;
+    padding: 40px;
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 23.4px;
+    color: $color-white;
+}

@@ -9,13 +9,13 @@ const samples = [
         name: "Hard Time",
         title: "Emergence from Shadows",
         source: "2.mp3",
-        cover: "sampleCover.jpg",
+        cover: "sampleCover2.jpg",
     },
     {
         name: "Love Music",
         title: "Dream of the Lights",
         source: "3.mp3",
-        cover: "sampleCover.jpg",
+        cover: "sampleCover3.jpg",
     },
     {
         name: "Medieval Times",
@@ -27,13 +27,13 @@ const samples = [
         name: "Metal",
         title: "Embers of the Abyss",
         source: "5.mp3",
-        cover: "sampleCover.jpg",
+        cover: "sampleCover2.jpg",
     },
     {
         name: "Pokemon",
         title: "Heart of a Champion",
         source: "6.mp3",
-        cover: "sampleCover.jpg",
+        cover: "sampleCover3.jpg",
     },
     {
         name: "Never Giving Up",
@@ -45,13 +45,13 @@ const samples = [
         name: "Personal Grow",
         title: "Unchained Aspirations",
         source: "8.mp3",
-        cover: "sampleCover.jpg",
+        cover: "sampleCover2.jpg",
     },
     {
         name:  "Pure Hapiness",
         title: "Euphoric Flow",
         source: "9.mp3",
-        cover: "sampleCover.jpg",
+        cover: "sampleCover3.jpg",
     },
     {
         name:  "Wealthy Man",
@@ -63,19 +63,19 @@ const samples = [
         name:  "Underated Champion",
         title:"Dungeon Beats",
         source: "11.mp3",
-        cover: "sampleCover.jpg",
+        cover: "sampleCover2.jpg",
     },
     {
         name:  "Pure Motivate",
         title:"Unstoppable Spirit",
         source: "12.mp3",
-        cover: "sampleCover.jpg",
+        cover: "sampleCover3.jpg",
     },
     {
         name:  "Ying & Yang",
         title:"Shadows in the Glow",
         source: "13.mp3",
-        cover: "sampleCover.jpg",
+        cover: "sampleCover2.jpg",
     },
     {
         name:  "Believe In",
@@ -87,7 +87,7 @@ const samples = [
         name:  "Escalating",
         title:"Escaleren",
         source: "15.mp3",
-        cover: "sampleCover.jpg",
+        cover: "sampleCover3.jpg",
     },
     {
         name:  "Feeling of Lost",
@@ -99,7 +99,7 @@ const samples = [
         name:  "Farm Vibe",
         title:"Echoes of the North",
         source: "17.mp3",
-        cover: "sampleCover.jpg",
+        cover: "sampleCover3.jpg",
     }
 ];
 
