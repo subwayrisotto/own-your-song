@@ -1,9 +1,9 @@
 {
   "files": {
-    "main.css": "/own-your-song/static/css/main.48fa17dc.css",
-    "main.js": "/own-your-song/static/js/main.475a8c6a.js",
+    "main.css": "/own-your-song/static/css/main.f59713b3.css",
+    "main.js": "/own-your-song/static/js/main.41b741d8.js",
     "static/js/488.29af69cf.chunk.js": "/own-your-song/static/js/488.29af69cf.chunk.js",
-    "static/media/bg.png": "/own-your-song/static/media/bg.ded42ce02e84bbc731cb.png",
+    "static/media/bg.png": "/own-your-song/static/media/bg.8a5c0a06c33855105dc1.png",
     "static/media/logo.svg": "/own-your-song/static/media/logo.64d29f64026e22a9031eb45368fd6ba2.svg",
     "static/media/Inter-Regular.woff": "/own-your-song/static/media/Inter-Regular.a252fc44cf11fd602874.woff",
     "static/media/step3.png": "/own-your-song/static/media/step3.809b99ab0679d796cf96.png",
@@ -24,14 +24,18 @@
     "static/media/instagram.svg": "/own-your-song/static/media/instagram.9cecf1be14119c1ad483ee0a1060b80c.svg",
     "static/media/telegram.svg": "/own-your-song/static/media/telegram.c5d1ba62828fd16e0401a7b6ecf4b752.svg",
     "static/media/youtube.svg": "/own-your-song/static/media/youtube.9b8ccaaec45bd55a125fd321abba0684.svg",
+    "static/media/slick.svg": "/own-your-song/static/media/slick.2630a3e3eab21c607e21.svg",
+    "static/media/slick.eot": "/own-your-song/static/media/slick.a4e97f5a2a64f0ab1323.eot",
+    "static/media/slick.ttf": "/own-your-song/static/media/slick.c94f7671dcc99dce43e2.ttf",
+    "static/media/slick.woff": "/own-your-song/static/media/slick.295183786cd8a1389865.woff",
     "index.html": "/own-your-song/index.html",
     "static/media/star.svg": "/own-your-song/static/media/star.114184eb31ea2b16546c98945b7765f4.svg",
-    "main.48fa17dc.css.map": "/own-your-song/static/css/main.48fa17dc.css.map",
-    "main.475a8c6a.js.map": "/own-your-song/static/js/main.475a8c6a.js.map",
+    "main.f59713b3.css.map": "/own-your-song/static/css/main.f59713b3.css.map",
+    "main.41b741d8.js.map": "/own-your-song/static/js/main.41b741d8.js.map",
     "488.29af69cf.chunk.js.map": "/own-your-song/static/js/488.29af69cf.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.48fa17dc.css",
-    "static/js/main.475a8c6a.js"
+    "static/css/main.f59713b3.css",
+    "static/js/main.41b741d8.js"
   ]
 }
