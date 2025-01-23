@@ -1,3 +1,5 @@
+import { faCircleCheck } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import styles from './SubscriptionCardComponent.module.scss';
 
@@ -47,8 +49,7 @@ const currency = {
   };
 
 function SubscriptionCard(props) {
-    const { plan, price, description } = props;
-
+    const { plan, price, description, benefits } = props;
     return (
         <div className={styles.subCardContainer}>
             <div className={styles.subCard}>
@@ -72,6 +73,19 @@ function SubscriptionCard(props) {
                         <p className={styles.subDescription}>
                             {description}
                         </p>
+
+                        <ul className={styles.subBenefitsList}>
+                            {
+                                benefits.map((benefit, index) => {
+                                    return(
+                                        <li className={styles.subBenefitListItem} key={index}>
+                                            <FontAwesomeIcon icon={faCircleCheck} />
+                                            <p className={styles.text}>{benefit}</p>
+                                        </li>
+                                    )
+                                })
+                            }
+                        </ul>
                     </div>
                </div>
             </div>

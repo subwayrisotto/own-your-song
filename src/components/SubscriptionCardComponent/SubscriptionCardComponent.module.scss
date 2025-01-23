@@ -95,11 +95,47 @@
 }
 
 .subDescriptionCtn{
-    font-family: 'Inter';
-    text-align: left;
-    padding: 40px;
-    font-size: 22px;
-    font-weight: 600;
-    line-height: 23.4px;
     color: $color-white;
+    padding: 40px;
+}
+
+.subDescription{
+    font-family: "Afacad";
+    font-size: 27.99px;
+    font-weight: 600;
+    line-height: 25.89px;
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.subBenefitsList{
+    list-style-type: none;
+    font-family: "Afacad";
+    font-size: 19.99px;
+    font-weight: 600;
+    line-height: 23.89px;
+    overflow-y: scroll;
+    max-height: 230px;
+    &::-webkit-scrollbar {
+        width: 6px;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+        background-color: $color-magenta;
+        border-radius: 4px; 
+    }
+    
+    &::-webkit-scrollbar-thumb:hover {
+        background-color: $color-pink;
+    }
+}
+
+.subBenefitListItem{
+    display: flex;
+    align-items: center;
+    padding-bottom: 10px;
+
+    .text{
+        margin-left: 10px;
+    }
 }

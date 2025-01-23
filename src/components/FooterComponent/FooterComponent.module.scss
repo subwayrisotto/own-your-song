@@ -102,3 +102,20 @@
       transition: transform .25s ease-out;
     }
 }
+
+@media screen and (max-width: 500px) {
+    .footerNavigationCtn{
+        padding-bottom: 45px;
+        .navList{
+            flex-direction: column;
+            gap: 20px;
+        }
+    }
+}
+
+@media screen and (max-width: 300px) {
+    .footerSocialMediaCtn .navList{
+        flex-direction: column;
+        gap: 10px;
+    }
+}

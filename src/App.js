@@ -7,6 +7,8 @@ import Contact from './pages/Contact';
 import Enterpise from './pages/Enterpise';
 import Shop from './pages/Shop';
 import FooterComponent from './components/FooterComponent/FooterComponent';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 function App() {
   return (

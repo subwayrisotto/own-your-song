@@ -12,13 +12,15 @@
     background-repeat: no-repeat; 
     width: 100%;
     padding-bottom: 100px;
+    overflow-x: hidden;
 }
 
 .ctn{
     max-width: 1440px;
     width: 100%;
     margin: 0 auto;
-    padding-top: 200px;
+    // padding-top: 200px;
+    padding: 200px 10px 10px 10px;
 }
 
 .textContent{
@@ -150,3 +152,19 @@
 //     grid-template-columns: repeat(3, 188px);
 //     gap: 25px;
 // }
+
+@media screen and (max-width: 600px) {
+    .ctn{
+        padding-top: 140px;
+    }
+
+    .textContent, .paddingTop{
+        padding-top: 55px;
+    }
+
+    .processListItem{
+        &:nth-child(2n+1), &:nth-child(2n){
+            flex-direction: column-reverse;
+        }
+    }
+}

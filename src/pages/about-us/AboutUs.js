@@ -7,8 +7,8 @@ import CardCoreValueComponent from '../../components/CardCoreValuesComponent/Car
 import ourSquad from '../../data/our-squad';
 import CardEmployersComponent from '../../components/CardEmployersComponent/CardEmployersComponent';
 import creativeProcesses from '../../data/creative-processes';
-import verticalLine from '../../assets/about-us/vertical-line.png'; 
-import horizontalLine from '../../assets/about-us/horizontal-line.png'; 
+// import verticalLine from '../../assets/about-us/vertical-line.png'; 
+// import horizontalLine from '../../assets/about-us/horizontal-line.png'; 
 import step1 from '../../assets/about-us/step1.png';
 import step2 from '../../assets/about-us/step2.png';
 import step3 from '../../assets/about-us/step3.png';
