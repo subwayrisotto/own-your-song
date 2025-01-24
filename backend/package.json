@@ -1,5 +1,5 @@
 {
-  "name": "own-your-song",
+  "name": "own-your-song-backend",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
