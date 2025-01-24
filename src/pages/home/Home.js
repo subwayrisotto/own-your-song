@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styles from './Home.module.scss';
 import samples from '../../data/samples';
 import PlayerComponent from '../../components/PlayerComponent/PlayerComponent';
 import contactDetails from '../../data/contact-details';
-import subscriptions from '../../data/subscriptions';
+// import subscriptions from '../../data/subscriptions';
 import SubscriptionCard from '../../components/SubscriptionCardComponent/SubscriptionCardComponent';
+import { getSubs, createSubs, deleteSub, updateSub } from '../../api';
 
 function Home() {
   const [currentSample, setCurrentSample] = useState(samples[5]);
@@ -29,7 +30,19 @@ function Home() {
       return newIndex; 
     });
   };
+
+  const [subscriptions, setSubscriptions] = useState([]);
   
+  useEffect(() => {
+    async function loadAllSubs(){
+      let data = await getSubs();
+      if(data) setSubscriptions(data);
+    }
+
+    loadAllSubs()
+  }, [])
+
+  console.log(subscriptions)
 
   return (
     <div className={styles.container}>

@@ -39,12 +39,6 @@ const subscriptions = [
             "3 verses + 3 choruses",
             "Artist of your choice",
             "Up to 5 style features",
-            "1 day (+20$) or 3 days free",
-            "Up to 5 edits",
-            "Unlimited text",
-            "3 verses + 3 choruses",
-            "Artist of your choice",
-            "Up to 5 style features",
         ]
     }
 ];
