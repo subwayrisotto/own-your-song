@@ -12,7 +12,7 @@ const allowedOrigins = [
 
 app.use(cors({
     origin: (origin, callback) => {
-        if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+        if (allowedOrigins.indexOf(origin) !== -1 || !origin) { 
             // Allow requests from these origins
             callback(null, true);
         } else {
