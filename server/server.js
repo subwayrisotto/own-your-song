@@ -5,8 +5,22 @@ const subs = require("./routes/subscriptions");
 
 const app = express();
 const PORT = process.env.PORT || 5000; // Default to 5000 if PORT is not defined
+const allowedOrigins = [
+    "http://localhost:3000", // Local development URL
+    "https://subwayrisotto.github.io/own-your-song/" // Production URL
+];
 
-app.use(cors());
+app.use(cors({
+    origin: (origin, callback) => {
+        if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+            // Allow requests from these origins
+            callback(null, true);
+        } else {
+            // Reject requests from other origins
+            callback(new Error('Not allowed by CORS'));
+        }
+    }
+}));
 app.use(express.json());
 app.use(subs); // Namespace routes
 
