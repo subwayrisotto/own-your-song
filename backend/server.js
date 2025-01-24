@@ -1,7 +1,7 @@
 const connect = require("./connect");
 const express = require("express");
 const cors = require("cors");
-const subs = require("./routes/subscriptions");
+const subs = require("./api/subscriptions");
 
 const app = express();
 const PORT = process.env.PORT || 5000; // Default to 5000 if PORT is not defined
@@ -23,7 +23,7 @@ const PORT = process.env.PORT || 5000; // Default to 5000 if PORT is not defined
 // }));
 app.use(cors());
 app.use(express.json());
-app.use('/api', subs); // Namespace routes
+app.use(subs); // Namespace routes
 
 // Centralized error handling
 app.use((err, req, res, next) => {
