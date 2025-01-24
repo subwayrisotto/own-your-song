@@ -25,7 +25,9 @@
     "web-vitals": "^4.2.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "concurrently \"npm run start:backend\" \"npm run start:frontend\"",
+    "start:frontend": "react-scripts start",
+    "start:backend": "cd server && npm start",
     "build": "react-scripts build",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
@@ -51,8 +53,10 @@
     ]
   },
   "devDependencies": {
+    "concurrently": "^9.1.2",
     "css-loader": "^7.1.2",
     "gh-pages": "^6.3.0",
+    "nodemon": "^3.1.9",
     "postcss-loader": "^8.1.1",
     "resolve-url-loader": "^5.0.0",
     "sass-loader": "^16.0.4"

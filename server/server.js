@@ -6,10 +6,7 @@ const subs = require("./routes/subscriptions");
 const app = express();
 const PORT = process.env.PORT || 5000; // Default to 5000 if PORT is not defined
 
-app.use(cors({
-    origin: "https://subwayrisotto.github.io", // Replace with your GitHub Pages URL
-    credentials: true, // If you're using cookies or authorization headers
-}));
+app.use(cors());
 app.use(express.json());
 app.use(subs); // Namespace routes
 

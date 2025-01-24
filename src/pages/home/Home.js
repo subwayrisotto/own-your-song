@@ -42,8 +42,6 @@ function Home() {
     loadAllSubs()
   }, [])
 
-  console.log(subscriptions)
-
   return (
     <div className={styles.container}>
       <div className={styles.ctn}>
