@@ -1,7 +1,7 @@
 const connect = require("./connect");
 const express = require("express");
 const cors = require("cors");
-const subs = require("./api/subscriptions");
+const subs = require("./routes/subscriptions");
 
 const app = express();
 const PORT = process.env.PORT || 5000; // Default to 5000 if PORT is not defined
