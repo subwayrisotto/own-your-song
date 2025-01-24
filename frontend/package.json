@@ -16,7 +16,8 @@
     "react-slick": "^0.30.3",
     "sass": "^1.83.1",
     "slick-carousel": "^1.8.1",
-    "web-vitals": "^4.2.4"
+    "web-vitals": "^4.2.4",
+    "next": "^13.0.0"
   },
   "scripts": {
     "build": "react-scripts build",
