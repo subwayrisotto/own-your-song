@@ -10,17 +10,35 @@ const handleErrors = (fn) => (req, res, next) => {
 };
 
 // Retrieve all subscriptions
-subRoutes.route("/subscriptions").get(
-    handleErrors(async (req, res) => {
-        let db = database.getDB();
-        let data = await db.collection("Subscriptions ").find({}).toArray();
-        if (data.length > 0) {
-            res.json(data);
-        } else {
-            res.status(404).json({ message: "No subscriptions found." });
-        }
-    })
-);
+// subRoutes.route("/subscriptions").get(
+//     handleErrors(async (req, res) => {
+//         let db = database.getDB();
+//         let data = await db.collection("Subscriptions ").find({}).toArray();
+//         if (data.length > 0) {
+//             res.json(data);
+//         } else {
+//             res.status(404).json({ message: "No subscriptions found." });
+//         }
+//     })
+// );
+
+subRoutes.get("/subscriptions", async (req, res) => {
+    try {
+        console.log("Attempting to connect to the database...");
+        const db = database.getDB();
+        console.log("Connected to the database.");
+
+        console.log("Fetching subscriptions from the database...");
+        const subscriptions = await db.collection("Subscriptions ").find({}).toArray(); // Fetch subscriptions
+        
+        console.log("Fetched subscriptions:", subscriptions);
+        res.status(200).json(subscriptions); // Return the subscriptions as JSON
+    } catch (error) {
+        console.error("Error in /subscriptions route:", error.message);  // Log the specific error message
+        res.status(500).json({ message: `Internal Server Error: ${error.message}` }); // Send more specific error message in response
+    }
+});
+
 
 // Retrieve a single subscription by ID
 subRoutes.route("/subscriptions/:id").get(
