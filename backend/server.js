@@ -33,9 +33,9 @@ app.use((err, req, res, next) => {
         // Connect to the database before handling requests
         await connect.connectToServer();
         console.log("Successfully connected to the database");
-        app.listen(PORT, () => {
-            console.log(`Server is running on port ${PORT}`);
-        });
+        // app.listen(PORT, () => {
+        //     console.log(`Server is running on port ${PORT}`);
+        // });
     } catch (err) {
         console.error("Failed to connect to the database:", err);
     }
