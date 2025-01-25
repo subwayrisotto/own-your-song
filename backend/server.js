@@ -8,10 +8,10 @@ const app = express();
 const PORT = process.env.PORT || 5050;
 
 // Middleware configuration
-const allowedOrigins = ['https://own-your-song.vercel.app/'];
+const allowedOrigins = ['https://own-your-song.vercel.app', 'http://localhost:3000'];
 app.use(cors({
     origin: allowedOrigins,
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    methods: ['GET', 'POST'],
     credentials: true
 }));
 
