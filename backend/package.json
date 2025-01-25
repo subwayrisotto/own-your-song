@@ -1,5 +1,5 @@
 {
-  "name": "own-your-song-backend",
+  "name": "oys-backend",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -12,8 +12,8 @@
     "nodemon": "^3.1.9"
   },
   "scripts": {
-    "start": "node server.js",
+    "start": "node index.js",
     "build": "react-scripts build",
-    "dev": "nodemon server.js"
+    "dev": "nodemon index.js"
   }
 }

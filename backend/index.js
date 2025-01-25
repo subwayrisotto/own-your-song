@@ -1,7 +1,6 @@
 const connect = require("./connect");
 const express = require("express");
 const cors = require("cors");
-const hello = require("./api/hello")
 const subs = require("./routes/subscriptions");
 
 const app = express();
@@ -16,8 +15,6 @@ app.use(cors(
 ));
 app.use(express.json());
 app.use(subs); // Namespace routes
-
-app.get("/", hello);
 
 // Centralized error handling
 app.use((err, req, res, next) => {
