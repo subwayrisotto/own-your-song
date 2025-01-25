@@ -68,3 +68,70 @@ export async function deleteSub(id) {
         throw error; // Re-throw the error for higher-level handling
     }
 }
+
+// Get all samples
+export async function getSamples() {
+    try {
+        const response = await axios.get(`${URL}/samples`);
+        if (response.status === 200) {
+            return response.data; // Return the data directly
+        } else {
+            throw new Error(`Failed to fetch samples: ${response.statusText}`);
+        }
+    } catch (error) {
+        console.error("Error fetching samples:", error);
+        throw error; // Re-throw the error for higher-level handling
+    }
+}
+
+// Get a single sample by ID
+export async function getSample(id) {
+    try {
+        const response = await axios.get(`${URL}/samples/${id}`);
+        if (response.status === 200) {
+            return response.data; // Return the data directly
+        } else {
+            throw new Error(`Failed to fetch sample with ID ${id}: ${response.statusText}`);
+        }
+    } catch (error) {
+        console.error("Error fetching sample:", error);
+        throw error; // Re-throw the error for higher-level handling
+    }
+}
+
+// Create a new sample
+export async function createSamples(post) {
+    try {
+        const response = await axios.post(`${URL}/samples`, post);
+        return response.data; // Return the created sample data
+    } catch (error) {
+        console.error("Error creating sample:", error);
+        throw error; // Re-throw the error for higher-level handling
+    }
+}
+
+// Update a sample by ID
+export async function updateSub(id, post) {
+    try {
+        const response = await axios.put(`${URL}/samples/${id}`, post);
+        return response.data; // Return the updated sample data
+    } catch (error) {
+        console.error("Error updating sample:", error);
+        throw error; // Re-throw the error for higher-level handling
+    }
+}
+
+// Delete a subscription by ID
+export async function deleteSample(id) {
+    try {
+        const response = await axios.delete(`${URL}/samples/${id}`);
+        if (response.status === 200) {
+            return response.data; // Return success message or result
+        } else {
+            throw new Error(`Failed to delete sample with ID ${id}: ${response.statusText}`);
+        }
+    } catch (error) {
+        console.error("Error deleting sample:", error);
+        throw error; // Re-throw the error for higher-level handling
+    }
+}

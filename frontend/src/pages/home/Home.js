@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import styles from './Home.module.scss';
-import samples from '../../data/samples';
+// import samples from '../../data/samples';
 import PlayerComponent from '../../components/PlayerComponent/PlayerComponent';
 import contactDetails from '../../data/contact-details';
 // import subscriptions from '../../data/subscriptions';
@@ -9,7 +9,9 @@ import { getSubs, createSubs, deleteSub, updateSub } from '../../api';
 
 function Home() {
   const [currentSample, setCurrentSample] = useState(samples[5]);
-  const [currentSampleIndex, setCurrentSampleIndex] = useState(5)
+  const [currentSampleIndex, setCurrentSampleIndex] = useState(5);
+  const [subscriptions, setSubscriptions] = useState([]);
+  const [samples, setSamples] = useState([]);
 
   const handleClick = id => {
     setCurrentSample(samples[id]);
@@ -30,8 +32,6 @@ function Home() {
       return newIndex; 
     });
   };
-
-  const [subscriptions, setSubscriptions] = useState([]);
   
   useEffect(() => {
     async function loadAllSubs(){
@@ -39,6 +39,12 @@ function Home() {
       if(data) setSubscriptions(data);
     }
 
+    async function loadAllSamples(){
+      let data = await getSamples();
+      if(data) setSamples(data);
+    }
+
+    loadAllSamples()
     loadAllSubs()
   }, [])
 
