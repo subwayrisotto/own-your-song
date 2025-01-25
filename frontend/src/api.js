@@ -111,7 +111,7 @@ export async function createSamples(post) {
 }
 
 // Update a sample by ID
-export async function updateSub(id, post) {
+export async function updateSample(id, post) {
     try {
         const response = await axios.put(`${URL}/samples/${id}`, post);
         return response.data; // Return the updated sample data
