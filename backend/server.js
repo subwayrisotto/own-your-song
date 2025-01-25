@@ -3,6 +3,7 @@ const express = require("express");
 const cors = require("cors");
 const hello = require("./api/hello");
 const subs = require("./routes/subscriptions");
+const samples = require("./routes/samples");
 
 const app = express();
 const PORT = process.env.PORT || 5050;
@@ -16,7 +17,8 @@ app.use(cors({
 }));
 
 app.use(express.json());
-app.use(subs); // Namespace routes
+app.use(subs); // subcriptions route
+app.use(samples); // samples route
 
 // Root route
 app.get("/", hello);

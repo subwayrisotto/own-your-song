@@ -9,6 +9,21 @@ if (!dbURI) {
 const client = new MongoClient(dbURI);
 let database;
 
+
+// async function insertMultipleDocs(data) {
+//     try {
+//         await client.connect();
+//         const db = client.db("OYS_DB");
+//         const collection = db.collection("Samples");
+//         const result = await collection.insertMany(data);
+//         console.log(`${result.insertedCount} documents inserted.`);
+//     } finally {
+//         await client.close();
+//     }
+// }
+
+// insertMultipleDocs(samples).catch(console.error);
+
 module.exports = {
     connectToServer: async () => {
         try {
@@ -28,3 +43,4 @@ module.exports = {
         return database;
     },
 };
+
