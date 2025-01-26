@@ -1,18 +1,35 @@
 import React, { useState, useEffect } from 'react'
 import styles from './Home.module.scss';
-import samples from '../../data/samples';
+// import samples from '../../data/samples';
 import PlayerComponent from '../../components/PlayerComponent/PlayerComponent';
 import contactDetails from '../../data/contact-details';
 // import subscriptions from '../../data/subscriptions';
 import SubscriptionCard from '../../components/SubscriptionCardComponent/SubscriptionCardComponent';
-import { getSubs } from '../../api';
+import { getSubs, getSamples } from '../../api';
 
 function Home() {
-  const [currentSample, setCurrentSample] = useState(samples[5]);
   const [currentSampleIndex, setCurrentSampleIndex] = useState(5);
   const [subscriptions, setSubscriptions] = useState([]);
-  // const [samples, setSamples] = useState([]);
+  const [samples, setSamples] = useState([]);
+  const [currentSample, setCurrentSample] = useState(samples[5]);
 
+  
+  
+  useEffect(() => {
+    async function loadDataFromDb(){
+      let subscriptions = await getSubs();
+      if(subscriptions) setSubscriptions(subscriptions);
+
+      let samples = await getSamples();
+      if(samples){
+        setSamples(samples);
+        setCurrentSample(samples[5]);
+      }
+    }
+    loadDataFromDb()
+  }, [])
+
+  console.log("Samples: ", samples)
   const handleClick = id => {
     setCurrentSample(samples[id]);
   }
@@ -32,21 +49,8 @@ function Home() {
       return newIndex; 
     });
   };
-  
-  useEffect(() => {
-    async function loadAllSubs(){
-      let data = await getSubs();
-      if(data) setSubscriptions(data);
-    }
 
-    // async function loadAllSamples(){
-    //   let data = await getSamples();
-    //   if(data) setSamples(data);
-    // }
-
-    // loadAllSamples()
-    loadAllSubs()
-  }, [])
+  console.log("Current Sample: ", currentSample)
 
   return (
     <div className={styles.container}>
@@ -106,7 +110,7 @@ function Home() {
             </ul>
 
             <div className={styles.samplePlayer}>
-              <PlayerComponent sample={currentSample} handleNextSample={handleNextSample} handlePrevSample={handlePrevSample} currentSampleIndex={currentSampleIndex} />
+              {/* <PlayerComponent sample={currentSample} handleNextSample={handleNextSample} handlePrevSample={handlePrevSample} currentSampleIndex={currentSampleIndex} /> */}
             </div>
           </div>
         </div>

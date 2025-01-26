@@ -9,12 +9,13 @@ const app = express();
 const PORT = process.env.PORT || 5050;
 
 // Middleware configuration
-const allowedOrigins = ['https://own-your-song.vercel.app', 'http://localhost:3000'];
-app.use(cors({
-    origin: allowedOrigins,
-    methods: ['GET', 'POST'],
-    credentials: true
-}));
+// const allowedOrigins = ['https://own-your-song.vercel.app', 'http://localhost:3000'];
+// app.use(cors({
+//     origin: allowedOrigins,
+//     methods: ['GET', 'POST'],
+//     credentials: true
+// }));
+app.use(cors());
 
 app.use(express.json());
 app.use(subs); // subcriptions route

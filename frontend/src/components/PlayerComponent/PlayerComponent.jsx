@@ -11,6 +11,8 @@ function PlayerComponent(props) {
 
     const audioRef = useRef(null);
 
+    console.log("Sample Player: ", sample)
+
     const handleSeek = (e) => {
         audioRef.current.currentTime = e.target.value;
         setCurrentTime(e.target.value);
