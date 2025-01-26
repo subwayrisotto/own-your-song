@@ -55,7 +55,7 @@ function SubscriptionCard(props) {
             <div className={styles.subCard}>
                <div className={styles.subCardFront}>
                     <div className={styles.subImageCtn}>
-                        <img className={styles.subImage} src={`${process.env.PUBLIC_URL}/subscription/${plan.toLowerCase()}.png`} />
+                        <img className={styles.subImage} src={`${process.env.PUBLIC_URL}/subscription/${plan.toLowerCase()}.png`} alt={plan} />
                     </div>
 
                     <div className={styles.subPlanCtn}>

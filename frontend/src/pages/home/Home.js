@@ -5,7 +5,7 @@ import PlayerComponent from '../../components/PlayerComponent/PlayerComponent';
 import contactDetails from '../../data/contact-details';
 // import subscriptions from '../../data/subscriptions';
 import SubscriptionCard from '../../components/SubscriptionCardComponent/SubscriptionCardComponent';
-import { getSubs, createSubs, deleteSub, updateSub } from '../../api';
+import { getSubs } from '../../api';
 
 function Home() {
   const [currentSample, setCurrentSample] = useState(samples[5]);
@@ -106,7 +106,7 @@ function Home() {
             </ul>
 
             <div className={styles.samplePlayer}>
-              <PlayerComponent sample={currentSample} handleNextSample={handleNextSample} handlePrevSample={handlePrevSample} />
+              <PlayerComponent sample={currentSample} handleNextSample={handleNextSample} handlePrevSample={handlePrevSample} currentSampleIndex={currentSampleIndex} />
             </div>
           </div>
         </div>

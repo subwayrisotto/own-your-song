@@ -21,7 +21,7 @@ function CardAchievementsComponent(props) {
         }, 50);
     
         return () => clearInterval(timer); 
-    }, []);
+    }, [value]);
 
     return (
         <div className={styles.card}>
