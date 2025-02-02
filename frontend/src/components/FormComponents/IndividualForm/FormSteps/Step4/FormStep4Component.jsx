@@ -1,146 +1,37 @@
-import React, { useState, useEffect } from 'react';
-import styles from './FormStep4.module.scss';
-import { useSearchParams } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import inputsData from "../../../../../data/inputsData";
+import styles from "./FormStep.module.scss";
+import TextAreaInput from "../../../../InputComponents/TextAreaInputComponent/TextAreaInputComponent";
 
-const SilverDateCtn = (props) => {
-  const {formData} = props;
-  return(
-    <div>
-      <p>You'll receive your order in 24 hours! </p>
-      <div>
-       <pre>{JSON.stringify(formData, null, 2)}</pre>
-      </div>
-    </div>
-  )
-}
+function FormStep5({ formData, setFormData, currentPlan }) {
+  const [text, setText] = useState(formData.story || "");
+  const variableName = inputsData.step4[0].variableName
 
-function FormStep4(props) {
-  const {formData} = props;
-  const [searchParams] = useSearchParams();
-  const [deliveryDates, setDeliveryDates] = useState([]);
-  const [rushValue, setRushValue] = useState(0);
-  const [activeIndex, setActiveIndex] = useState(null);  
-  const planFromUrl = searchParams.get("plan");
-
-  const rushDayFee = {
-    silver: {
-      1: 0,
-      2: 'disabled',
-      3: 'disabled',
-      4: 'disabled',
-      5: 'disabled',
-    },
-    gold: {
-      1: 100,
-      2: 50,
-      3: 0,
-      4: 'disabled',
-      5: 'disabled',
-    },
-    platinum: {
-      1: 200,
-      2: 150,
-      3: 100,
-      4: 50,
-      5: 0,
-    },
-  };
-
-  const handleRushFeeValue = (index) => {
-    const fee = rushDayFee[planFromUrl]?.[index + 1];
-    if (fee !== 'disabled') {
-      setRushValue(fee);
-      setActiveIndex(index); 
-    }
-  };
-
-  const getNextDays = (count) => {
-    const days = [];
-    const today = new Date();
-
-    for (let i = 0; i < count; i++) {
-      const nextDay = new Date();
-      nextDay.setDate(today.getDate() + i);
-
-      const formattedDay = {
-        day: nextDay.getDate(),
-        month: nextDay.toLocaleDateString("en-US", { month: "short" }),
-        weekday: nextDay.toLocaleDateString("en-US", { weekday: "short" }),
-        rushFee: rushDayFee[planFromUrl]?.[i + 1], 
-      };
-
-      days.push(formattedDay);
-    }
-
-    return days;
-  };
+  // Get max character limit based on plan
+  const planData = inputsData.step4[0].numbersOfCharacters.find(
+    (item) => item.plan === currentPlan
+  );
+  const maxChars = planData?.number === "unlimited" ? Infinity : planData?.number;
+  const placeholder = inputsData.step4[0].placeholder;
 
   useEffect(() => {
-    const days = getNextDays(5);
-    setDeliveryDates(days);
-
-    const firstZeroFeeIndex = days.findIndex(date => date.rushFee === 0);
-    if (firstZeroFeeIndex !== -1) {
-      setActiveIndex(firstZeroFeeIndex); 
-      setRushValue(0); 
+    if (typeof maxChars === "number" && text.length > maxChars) {
+      setText(text.slice(0, maxChars));
     }
-
-    const interval = setInterval(() => {
-      setDeliveryDates(getNextDays(5));
-    }, 24 * 60 * 60 * 1000); // 24 hours in milliseconds
-
-    return () => clearInterval(interval);
-  }, [planFromUrl]); 
+  }, [currentPlan]);
 
   return (
-    planFromUrl === "silver" ? (
-      <SilverDateCtn formData={formData} />
-    ) : (
-      deliveryDates.length > 0 ? (
-        <div className={styles.datePickerCtn}>
-          <p className={styles.headerText}>Short on time?</p>
-          <p className={styles.descriptionText}>
-            We understand that sometimes you need things done faster. With our express service options, you can reduce waiting times and get your order completed sooner.
-          </p>
-    
-          <ul className={styles.dateList}>
-            {deliveryDates.map((date, index) => {
-              const isDisabled = date.rushFee === 'disabled';
-              const isActive = activeIndex === index && date.rushFee === 0; 
-    
-              return (
-                <li
-                  key={index}
-                  className={`${styles.dateListItem} ${isDisabled ? styles.isDisabled : ''} ${isActive ? styles.active : ''}`} // Apply active class if matched
-                  onClick={() => {
-                    if (!isDisabled) {
-                      handleRushFeeValue(index);
-                    }
-                  }}
-                >
-                  <p className={styles.weekday}>{date.weekday}</p>
-                  <p className={styles.month_day}>
-                    {date.month} {date.day}
-                  </p>
-                </li>
-              );
-            })}
-          </ul>
-    
-          <div className={styles.rushServiceCtn}>
-            <p className={styles.rushText}>Rush service fee for song delivery:</p>
-            <p className={styles.rushValue}>{rushValue === 'disabled' ? 'Not available' : `${rushValue}$`}</p>
-          </div>
-    
-          <p className={styles.descriptionText}>
-            Delivery of your song will be completed by the end of the day (UTC) on the specified date.
-          </p>
-        </div>
-      ) : (
-        <div>Loading...</div>
-      )
-    )
-  )
+    <div className={styles.stepCtn}>
+      <p className={styles.headerText}>Tell your story</p>
+      <p className={styles.subHeaderText}>
+        Tell your story, or write your lyrics to a song we should sing (Limitations in writing according to the rate + example of what can be written)
+      </p>
+
+      <div className={styles.inputsCtn}>
+        <TextAreaInput text={text} setText={setText} maxChars={maxChars} placeholder={placeholder} currentPlan={currentPlan} formData={formData} setFormData={setFormData} variableName={variableName}/>
+      </div>
+    </div>
+  );
 }
 
-export default FormStep4;
+export default FormStep5;

@@ -78,16 +78,13 @@
     transition: transform 0.3s ease; 
     cursor: pointer;
 
-    &.show {
-        transform: translateY(0); 
-        border-bottom-left-radius: 0;
-        border-bottom-right-radius: 0;
-        border-bottom: 1px solid rgba(217, 217, 217, 0.5);
+    transform: translateY(0); 
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom: 1px solid rgba(217, 217, 217, 0.5);
 
-        &:hover{
-            background: rgba(217, 217, 217, 0.5);
-        }
-    
+    &:hover{
+        background: rgba(217, 217, 217, 0.5);
     }
     
     &:last-child {

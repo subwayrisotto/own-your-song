@@ -3,6 +3,7 @@ import FormStep1 from './FormSteps/Step1/FormStep1Component';
 import FormStep2 from './FormSteps/Step2/FormStep2Component';
 import FormStep3 from './FormSteps/Step3/FormStep3Component';
 import FormStep4 from './FormSteps/Step4/FormStep4Component';
+import FormStep5 from './FormSteps/Step5/FormStep5Component';
 import styles from './IndividualForm.module.scss';
 import { getSubs } from '../../../api';
 import { useSearchParams } from "react-router-dom";
@@ -19,7 +20,7 @@ function Individual() {
   const [searchParams, setSearchParams] = useSearchParams();
   const stepFromUrl = parseInt(searchParams.get("step")) || 1;
   const [step, setStep] = useState(stepFromUrl);
-  const maxStep = 4;
+  const maxStep = 5;
   const stepsArray = Array.from({ length: maxStep }, (_, index) => index + 1);
 
   const [plans, setPlans] = useState([]);
@@ -36,7 +37,8 @@ function Individual() {
     songMood: '',
     songStyle: '',
     songTempo: '',
-    instruments: ''
+    instruments: '', 
+    story: ''
   });
   
 
@@ -85,6 +87,8 @@ function Individual() {
         return <FormStep2 formData={formData} setFormData={setFormData}/>;
       case 3: 
         return <FormStep3 currentPlan={currentPlan} formData={formData} setFormData={setFormData}/>;
+      case 4: 
+        return <FormStep4 currentPlan={currentPlan} formData={formData} setFormData={setFormData}/>;
       default: 
         return <FormStep1 formData={formData} setFormData={setFormData}/>;
     }
@@ -117,7 +121,7 @@ function Individual() {
           </div>
         </div>
         {
-          step !== 4 
+          step !== 5
             ? (
               // <div className={styles.imagesCtn}>
               //   <img src={`${process.env.PUBLIC_URL}/form/image1.png`} alt="image1" className={styles.img1}/> 
@@ -157,7 +161,7 @@ function Individual() {
             </div>
             ) : (
               <div className={styles.dateBody}>
-                <FormStep4 formData={formData}/>
+                <FormStep5 formData={formData}/>
               </div>
             )
         }

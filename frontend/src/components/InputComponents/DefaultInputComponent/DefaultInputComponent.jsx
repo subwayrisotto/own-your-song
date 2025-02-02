@@ -5,27 +5,21 @@ function DefaultInput(props) {
     const { type, index, placeholder, variableName, formData, setFormData } = props;
     const [currentValue, setCurrentValue] = useState('');
 
-    useEffect(() => {
-        if (formData && variableName in formData) {
-            setCurrentValue(formData[variableName]); 
-        }
-    }, [formData, variableName]);
-
     const handleChange = (e) => {
-        setCurrentValue(e.target.value);
+        const value = e.target.value;
+        setCurrentValue(value);
         setFormData((prevData) => ({
             ...prevData,
-            [variableName]: e.target.value, 
+            [variableName]: value,
         }));
     };
 
     return (
         <input
             type={type}
-            id={`${styles.inputArea}${index}`} 
+            id={`${styles.inputArea}${index}`}
             className={styles.inputArea}
-            placeholder={placeholder || ''} 
-            key={index} 
+            placeholder={placeholder || ''}
             value={currentValue}
             onChange={handleChange}
             required

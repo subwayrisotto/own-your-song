@@ -34,7 +34,7 @@ const DisabledPlaceholder = ({ placeholder }) => {
 function SelectInput({ placeholder, options, isOpen, toggleSelectInput, isAllowedForSilver, currentPlan, variableName, formData, setFormData }) {
   const [isArrowTriggered, setIsArrowTriggered] = useState(false);
   const [resetOptions, setResetOptions] = useState(true);
-  const [currentValue, setCurrentValue] = useState(''); // Track selected value
+  const [currentValue, setCurrentValue] = useState(placeholder); // Track selected value
 
   useEffect(() => {
     // Ensure formData contains the field and set the initial selected value

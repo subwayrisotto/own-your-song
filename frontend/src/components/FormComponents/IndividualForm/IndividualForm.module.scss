@@ -79,7 +79,7 @@
     flex: 1;
     height: 2px;
     background-color: $color-purple;
-    width: 113px;
+    width: 75px;
     transition: .25s ease;
 
     // &.active{
@@ -99,7 +99,7 @@
     transition: .25s ease;
 
     &.active{
-        width: 114px;
+        width: 75px;
     }
 }
 
@@ -161,6 +161,7 @@
     font-size: 12px;
     border-radius: 15px;
     padding: 10px;
+    z-index: 100;
 }
 
 .benefit{

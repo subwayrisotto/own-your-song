@@ -98,8 +98,30 @@ const inputsData = {
             options: [
                 "Piano", "Guitar (acoustic/electric)", "Percussion", "Violin","Saxophone","Synthesizer","Other"
             ],
-            variables: 'instruments'
+            variableName: 'instruments'
         },
+    ],
+    step4: [
+        {
+            title: 'Write your story',
+            placeholder: 'Write your story...',
+            type: 'textarea',
+            variableName: 'story',
+            numbersOfCharacters: [
+                {
+                    plan: 'silver',
+                    number: 50
+                },
+                {
+                    plan: 'gold',
+                    number: 100
+                },
+                {
+                    plan: 'platinum',
+                    number: 'unlimited'
+                }
+            ]
+        }
     ]
 }
 
