@@ -1,0 +1,24 @@
+@use "../../styles/mixins.scss";
+@import "../../styles/colors.scss";
+
+
+.container{
+    width: 100%;
+    // height: 100%;
+    // padding-bottom: 100px;
+    padding: 130px 0 50px;
+    background: $color-midnight-violet;
+
+}
+
+.ctn{
+    max-width: 1440px;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    // padding: 200px 10px 10px 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+

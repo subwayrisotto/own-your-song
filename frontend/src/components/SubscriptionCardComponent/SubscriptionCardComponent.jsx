@@ -49,9 +49,9 @@ const currency = {
   };
 
 function SubscriptionCard(props) {
-    const { plan, price, description, benefits } = props;
+    const { plan, price, description, benefits, handlePlanSelect } = props;
     return (
-        <div className={styles.subCardContainer} onClick={() => console.log("You chose the", plan, "plan")}>
+        <div className={styles.subCardContainer} onClick={() => handlePlanSelect(plan)}>
             <div className={styles.subCard}>
                <div className={styles.subCardFront}>
                     <div className={styles.subImageCtn}>

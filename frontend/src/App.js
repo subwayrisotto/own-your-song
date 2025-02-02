@@ -9,6 +9,7 @@ import Shop from './pages/Shop';
 import FooterComponent from './components/FooterComponent/FooterComponent';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import Form from './components/FormComponents/FormComponent';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path='/contact' element={<Contact />} />
         <Route path='/enterpise' element={<Enterpise />} />
         <Route path='/shop' element={<Shop />} />
+        <Route path='/form' element={<Form />} />
       </Routes>
 
       <FooterComponent />

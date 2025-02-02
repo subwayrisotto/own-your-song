@@ -1,0 +1,98 @@
+.selectInput {
+    width: 100%;
+}
+
+.selectPlaceholder {
+    width: 100%;
+    background: rgba(160, 160, 160, 0.29);
+    border-radius: 14px;
+    padding: 18px 15px;
+    font-size: 15px;
+    color: #fff;
+    font-family: 'Inter';
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+
+    .arrow {
+        transition: transform 0.3s ease;
+        cursor: pointer;
+
+        &.rotated {
+            transform: rotate(180deg);
+        }
+    }
+
+    &.opened {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        border-bottom: 1px solid rgba(217, 217, 217, 0.5);
+    }
+}
+
+.selectPlaceholderDisabled{
+    width: 100%;
+    background: rgba(88, 88, 88, 0.29);
+    box-shadow: 0px 2px 6.1px 0px rgba(0, 0, 0, 0.25);
+    border-radius: 14px;
+    padding: 18px 15px;
+    font-size: 15px;color: #888; 
+    font-family: 'Inter';
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    img{
+        width: 19px;
+        height: auto;
+    }
+}
+
+.optionsCtn {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.3s ease; 
+
+    &.open {
+        max-height: 500px; 
+    }
+}
+
+.selectOption {
+    width: 100%;
+    background: rgba(160, 160, 160, 0.29);
+    padding: 18px 15px;
+    font-size: 15px;
+    color: #fff;
+    font-family: 'Inter';
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom: 1px solid rgba(217, 217, 217, 0.5);
+    position: relative;
+    z-index: 1;
+    border: none;
+    transition: transform 0.3s ease; 
+    cursor: pointer;
+
+    &.show {
+        transform: translateY(0); 
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        border-bottom: 1px solid rgba(217, 217, 217, 0.5);
+
+        &:hover{
+            background: rgba(217, 217, 217, 0.5);
+        }
+    
+    }
+    
+    &:last-child {
+        border-bottom-left-radius: 14px;
+        border-bottom-right-radius: 14px;
+        border-bottom: 0;
+    }
+}

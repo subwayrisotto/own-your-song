@@ -6,14 +6,21 @@ import contactDetails from '../../data/contact-details';
 // import subscriptions from '../../data/subscriptions';
 import SubscriptionCard from '../../components/SubscriptionCardComponent/SubscriptionCardComponent';
 import { getSubs, getSamples } from '../../api';
+import { useNavigate } from 'react-router-dom';
 
 function Home() {
+  const navigate = useNavigate();
+
   const [currentSampleIndex, setCurrentSampleIndex] = useState(5);
   const [subscriptions, setSubscriptions] = useState([]);
   const [samples, setSamples] = useState([]);
   const [currentSample, setCurrentSample] = useState(samples[5]);
-
+  const [selectedPlan, setSelectedPlan] = useState(null);
   
+  const handlePlanSelect = (plan) => {
+    setSelectedPlan(plan);
+    navigate(`/form?plan=${encodeURIComponent(plan.toLowerCase())}`);
+  };
   
   useEffect(() => {
     async function loadDataFromDb(){
@@ -29,7 +36,6 @@ function Home() {
     loadDataFromDb()
   }, [])
 
-  console.log("Samples: ", samples)
   const handleClick = id => {
     setCurrentSample(samples[id]);
   }
@@ -49,8 +55,6 @@ function Home() {
       return newIndex; 
     });
   };
-
-  console.log("Current Sample: ", currentSample)
 
   return (
     <div className={styles.container}>
@@ -77,7 +81,7 @@ function Home() {
             {
               subscriptions.map((sub, index) => {
                 return(
-                  <SubscriptionCard {...sub} key={index} />
+                  <SubscriptionCard {...sub} key={index} handlePlanSelect={handlePlanSelect}/>
                 )
               })
             }
@@ -110,7 +114,14 @@ function Home() {
             </ul>
 
             <div className={styles.samplePlayer}>
-              {/* <PlayerComponent sample={currentSample} handleNextSample={handleNextSample} handlePrevSample={handlePrevSample} currentSampleIndex={currentSampleIndex} /> */}
+              {currentSample && (
+                <PlayerComponent
+                  sample={currentSample}
+                  handleNextSample={handleNextSample}
+                  handlePrevSample={handlePrevSample}
+                  currentSampleIndex={currentSampleIndex}
+                />
+              )}
             </div>
           </div>
         </div>
