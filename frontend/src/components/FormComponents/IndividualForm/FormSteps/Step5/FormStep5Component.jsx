@@ -5,11 +5,8 @@ import { useSearchParams } from "react-router-dom";
 const SilverDateCtn = (props) => {
   const {formData} = props;
   return(
-    <div>
-      <p>You'll receive your order in 24 hours! </p>
-      <div>
-       <pre>{JSON.stringify(formData, null, 2)}</pre>
-      </div>
+    <div className={styles.silverDateCtn}>
+      <p className={styles.headerText}>You'll receive your order in 24 hours! </p>
     </div>
   )
 }

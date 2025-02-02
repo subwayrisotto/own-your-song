@@ -15,15 +15,20 @@ function DefaultInput(props) {
     };
 
     return (
-        <input
-            type={type}
-            id={`${styles.inputArea}${index}`}
-            className={styles.inputArea}
-            placeholder={placeholder || ''}
-            value={currentValue}
-            onChange={handleChange}
-            required
-        />
+        <>
+            <input
+                type={type}
+                id={`${styles.inputArea}${index}`}
+                className={styles.inputArea}
+                placeholder={placeholder || ''}
+                value={currentValue}
+                onChange={handleChange}
+                required
+            />
+            <div className={styles.errorMessages}>
+                <p>Error</p>
+            </div>
+        </>
     );
 }
 
