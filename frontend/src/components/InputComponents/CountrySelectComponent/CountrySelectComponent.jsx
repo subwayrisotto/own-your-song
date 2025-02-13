@@ -1,14 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './CountrySelectComponent.module.scss';
-import countries from 'world-countries';
 
 const flagCDN = 'https://flagcdn.com/w320';
-
-const formattedCountries = countries.map((country) => ({
-  value: country.cca2,
-  label: country.name.common,
-  flag: `${flagCDN}/${country.cca2.toLocaleLowerCase()}.png`,
-}));
 
 const Option = ({ value, label, flag, onSelect }) => {
   return (
@@ -42,6 +35,27 @@ function CountrySelect() {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedCountry, setSelectedCountry] = useState('Choose a country');
   const [selectedFlag, setSelectedFlag] = useState(null);
+  const [countries, setCountries] = useState([]);
+
+  useEffect(() => {
+    fetch('https://restcountries.com/v3.1/all')
+      .then(response => response.json())
+      .then(data => {
+        const formattedData = data
+          .map(country => ({
+            label: country.name.common,
+            flag:
+              country.name.common === 'Afghanistan'
+                ? `${flagCDN}/af.png` // Correct pre-Taliban flag
+                : country.flags.svg, // Default flag
+          }))
+          .sort((a, b) => a.label.localeCompare(b.label)); // Sort alphabetically
+  
+        setCountries(formattedData);
+      })
+      .catch(error => console.error('Error fetching countries:', error));
+  }, []);
+
 
   const toggleOptions = () => {
     setIsOpen(!isOpen); 
@@ -62,7 +76,7 @@ function CountrySelect() {
         isOpen={isOpen}
       />
       <div className={`${styles.optionsCtn} ${isOpen ? styles.open : ''}`}>
-        {formattedCountries.map((country, index) => (
+        {countries.map((country, index) => (
           <Option key={index} {...country} onSelect={handleSelect} />
         ))}
       </div>
