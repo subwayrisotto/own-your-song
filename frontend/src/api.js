@@ -135,3 +135,15 @@ export async function deleteSample(id) {
         throw error; // Re-throw the error for higher-level handling
     }
 }
+
+export async function createPayment(data) {
+    try {
+        const response = await axios.post(`${URL}/checkout-session`, data);
+
+        if (response.data.url) {
+            window.location.href = response.data.url; // Redirect to Stripe Checkout
+        }
+    } catch (error) {
+        console.error("Payment Error:", error);
+    }
+}

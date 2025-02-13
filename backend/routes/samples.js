@@ -36,7 +36,7 @@ samplesRoutes.route("/samples/:id").get(
 );
 
 // Create a new subscription
-samplesRoutes.route("/Samples").post(
+samplesRoutes.route("/samples").post(
     handleErrors(async (req, res) => {
         let db = database.getDB();
         const { name, title, source, cover } = req.body;

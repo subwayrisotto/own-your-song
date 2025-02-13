@@ -1,25 +1,72 @@
-import * as yup from "yup";
+import * as Yup from 'yup';
 
-// Full form schema
-export const formSchema = [
-  yup.object({
-    funnyStory: yup.string().min(5, { message: "Funny story must be at least 5 characters long" }),
-    characterTraits: yup.string().min(5, { message: "Character traits must be at least 5 characters long" }),
-    hobbies: yup.string().min(5, { message: "Hobbies must be at least 5 characters long" }),
-  }).required(),
-  yup.object({
-    email: yup.string().email({ message: "Invalid email address" }),
-    name: yup.string().min(3, { message: "Name must be at least 3 characters long" }),
-    recipient: yup.string().min(3, { message: "Recipient name must be at least 3 characters long" }),
-    recipientRole: yup.string().min(3, { message: "Recipient role must be at least 3 characters long" }),
-  }).required(),
-  yup.object({
-    songMood: yup.string().min(3, { message: "Song mood must be at least 3 characters long" }),
-    songStyle: yup.string().min(3, { message: "Song style must be at least 3 characters long" }),
-    songTempo: yup.string().min(3, { message: "Song tempo must be at least 3 characters long" }),
-    instruments: yup.string().min(3, { message: "Instruments must be at least 3 characters long" }),
-  }).required(),
-  yup.object({
-    story: yup.string().min(5, { message: "Story must be at least 5 characters long" })
-  }).required()
+export const getFormSchema = (currentPlan) => [
+  Yup.object({
+    funnyStory: Yup.string()
+      .min(5, "Funny story must be at least 5 characters long")
+      .max(500, "Funny story cannot exceed 500 characters")
+      .required("Funny story is required"),
+    characterTraits: Yup.string()
+      .min(5, "Character traits must be at least 5 characters long")
+      .max(300, "Character traits cannot exceed 300 characters")
+      .required("Character traits are required"),
+    hobbies: Yup.string()
+      .min(5, "Hobbies must be at least 5 characters long")
+      .max(300, "Hobbies cannot exceed 300 characters")
+      .required("Hobbies are required"),
+  }),
+  Yup.object({
+    email: Yup.string()
+      .email("Invalid email address")
+      .required("Email is required"),
+    name: Yup.string()
+      .min(3, "Name must be at least 3 characters long")
+      .max(100, "Name cannot exceed 100 characters")
+      .matches(/^[a-zA-Z\s]+$/, "Name can only contain letters and spaces")
+      .required("Name is required"),
+    recipient: Yup.string()
+      .min(3, "Recipient name must be at least 3 characters long")
+      .max(100, "Recipient name cannot exceed 100 characters")
+      .matches(/^[a-zA-Z\s]+$/, "Recipient name can only contain letters and spaces")
+      .required("Recipient name is required"),
+    recipientRole: Yup.string()
+      .min(3, "Recipient role must be at least 3 characters long")
+      .max(50, "Recipient role cannot exceed 50 characters")
+      .required("Recipient role is required"),
+  }),
+  Yup.object({
+    songMood: Yup.string()
+      .min(3, "Song mood must be at least 3 characters long")
+      .max(50, "Song mood cannot exceed 50 characters")
+      .required("Song mood is required"),
+    songStyle: Yup.string()
+      .when([], {
+        is: () => currentPlan === "gold" || currentPlan === "platinum",
+        then: (schema) => schema.required("Song style is required for Gold/Platinum"),
+        otherwise: (schema) => schema.notRequired(),
+      }),
+    songTempo: Yup.string()
+      .min(3, "Song tempo must be at least 3 characters long")
+      .max(50, "Song tempo cannot exceed 50 characters")
+      .required("Song tempo is required"),
+    instruments: Yup.string()
+      .min(3, "Instruments must be at least 3 characters long")
+      .max(100, "Instruments cannot exceed 100 characters")
+      .required("Instruments are required"),
+  }),
+  Yup.object({
+    story: Yup.string()
+      .min(5, "Story must be at least 5 characters long")
+      .when([], {
+        is: () => currentPlan === "silver",
+        then: (schema) => schema.max(50, "Story cannot exceed 50 characters for Silver plan"),
+        otherwise: (schema) =>
+          schema.when([], {
+            is: () => currentPlan === "gold",
+            then: (schema) => schema.max(100, "Story cannot exceed 100 characters for Gold plan"),
+            otherwise: (schema) => schema.max(1000, "Story cannot exceed 1000 characters"),
+          }),
+      })
+      .required("Story is required"),
+  })
 ];

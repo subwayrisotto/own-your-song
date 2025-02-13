@@ -3,9 +3,9 @@ import inputsData from "../../../../../data/inputsData";
 import styles from "./FormStep.module.scss";
 import TextAreaInput from "../../../../InputComponents/TextAreaInputComponent/TextAreaInputComponent";
 
-function FormStep5({ formData, setFormData, currentPlan }) {
+function FormStep5({ formData, setFormData, currentPlan, errors }) {
   const [text, setText] = useState(formData.story || "");
-  const variableName = inputsData.step4[0].variableName
+  const variableName = inputsData.step4[0].variableName;
 
   // Get max character limit based on plan
   const planData = inputsData.step4[0].numbersOfCharacters.find(
@@ -28,7 +28,17 @@ function FormStep5({ formData, setFormData, currentPlan }) {
       </p>
 
       <div className={styles.inputsCtn}>
-        <TextAreaInput text={text} setText={setText} maxChars={maxChars} placeholder={placeholder} currentPlan={currentPlan} formData={formData} setFormData={setFormData} variableName={variableName}/>
+        <TextAreaInput 
+          text={text} 
+          setText={setText} 
+          maxChars={maxChars} 
+          placeholder={placeholder} 
+          currentPlan={currentPlan} 
+          formData={formData} 
+          setFormData={setFormData} 
+          variableName={variableName} 
+          errorMessage={errors?.[variableName]}  
+        />
       </div>
     </div>
   );

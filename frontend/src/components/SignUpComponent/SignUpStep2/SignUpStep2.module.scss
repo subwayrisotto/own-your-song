@@ -1,0 +1,11 @@
+@use "../../../styles/mixins.scss";
+@import "../../../styles/colors.scss";
+
+.stepCtn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+}

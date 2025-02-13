@@ -4,7 +4,7 @@ import SelectInput from '../../../../InputComponents/SelectInputComponent/Select
 import styles from './FormStep.module.scss';
 
 function FormStep3(props) {
-  const {currentPlan, formData, setFormData} = props
+  const {currentPlan, formData, setFormData, errors} = props
   const [openIndex, setOpenIndex] = useState(null);
 
   const toggleSelectInput = (index) => {
@@ -28,6 +28,7 @@ function FormStep3(props) {
               toggleSelectInput={() => toggleSelectInput(index)} 
               formData={formData}
               setFormData={setFormData}
+              errorMessage={errors?.[input.variableName]?.message || errors?.[input.variableName]}
             />
           </div>
         ))}

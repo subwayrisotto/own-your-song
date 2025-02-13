@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import ErrorInput from '../ErrorInputComponent/ErrorInputComponent';
 import styles from './SelectInputComponent.module.scss';
 
 const Option = ({ option, handleSelect }) => {
   return (
-    <div className={styles.selectOption} onClick={() => handleSelect(option)}>
+    <div className={styles.selectOption} onClick={() => handleSelect(option)} value={option}>
       {option}
     </div>
   );
@@ -31,13 +32,33 @@ const DisabledPlaceholder = ({ placeholder }) => {
   );
 };
 
-function SelectInput({ placeholder, options, isOpen, toggleSelectInput, isAllowedForSilver, currentPlan, variableName, formData, setFormData }) {
+function SelectInput({ 
+  placeholder, 
+  options, 
+  isOpen, 
+  toggleSelectInput, 
+  isAllowedForSilver, 
+  currentPlan, 
+  variableName, 
+  formData, 
+  setFormData, 
+  errorMessage 
+}) {
   const [isArrowTriggered, setIsArrowTriggered] = useState(false);
   const [resetOptions, setResetOptions] = useState(true);
-  const [currentValue, setCurrentValue] = useState(placeholder); // Track selected value
+  const [currentValue, setCurrentValue] = useState(placeholder); 
+  const [localError, setLocalError] = useState(errorMessage); 
 
   useEffect(() => {
-    // Ensure formData contains the field and set the initial selected value
+    // Disable validation only for "songStyle" when on Silver plan
+    if (variableName === "songStyle" && currentPlan === "silver") {
+      setLocalError(null);
+    } else {
+      setLocalError(errorMessage);
+    }
+  }, [errorMessage, currentPlan, variableName]);
+
+  useEffect(() => {
     if (formData && variableName in formData) {
       setCurrentValue(formData[variableName] || placeholder); 
     }
@@ -49,38 +70,40 @@ function SelectInput({ placeholder, options, isOpen, toggleSelectInput, isAllowe
   };
 
   const handleSelect = (selectedOption) => {
-    setCurrentValue(selectedOption); // Update UI
+    setCurrentValue(selectedOption); 
+    if (!(variableName === "songStyle" && currentPlan === "silver")) {
+      setLocalError(null); // Remove error only if not Silver plan & songStyle
+    }
     setFormData((prevData) => ({
       ...prevData,
-      [variableName]: selectedOption, // Update formData dynamically
+      [variableName]: selectedOption, 
     }));
-    toggleSelectInput(); // Close dropdown after selection
+    toggleSelectInput(); 
   };
 
   useEffect(() => {
-    if (isOpen) {
-      setResetOptions(false);
-    } else {
-      setResetOptions(true);
-    }
+    setResetOptions(!isOpen);
   }, [isOpen]);
 
   return (
     <div className={styles.selectInput}>
-      {currentPlan === "silver" && !isAllowedForSilver ? (
+      {currentPlan === "silver" && variableName === "songStyle" ? (
         <DisabledPlaceholder placeholder="Upgrade to Gold/Platinum plans to unlock it" />
       ) : (
         <Placeholder placeholder={currentValue} isOpen={isOpen} isArrowTriggered={isArrowTriggered} handleClick={handleClick} />
       )}
 
-      <div className={`${styles.optionsCtn} ${isOpen ? styles.open : ''}`}>
+      <div className={`${styles.optionsCtn} ${isOpen ? styles.open : ''}`} name={variableName}>
         {isOpen &&
           options.map((option, index) => (
             <Option option={option} key={index} handleSelect={handleSelect} />
           ))}
       </div>
+
+      {(localError && !(variableName === "songStyle" && currentPlan === "silver")) && <ErrorInput errorMessage={localError} />}
     </div>
   );
 }
+
 
 export default SelectInput;

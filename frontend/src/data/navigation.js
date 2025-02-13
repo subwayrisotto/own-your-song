@@ -13,8 +13,8 @@ const navigation = [
     },
     {
         id: 3, 
-        name: "Enterpise",
-        navigateTo: "/enterpise",
+        name: "Enterprise",
+        navigateTo: "/enterprise",
         isActive: false,
     },
     {

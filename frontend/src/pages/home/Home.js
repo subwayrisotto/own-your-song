@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import styles from './Home.module.scss';
-// import samples from '../../data/samples';
 import PlayerComponent from '../../components/PlayerComponent/PlayerComponent';
 import contactDetails from '../../data/contact-details';
-// import subscriptions from '../../data/subscriptions';
 import SubscriptionCard from '../../components/SubscriptionCardComponent/SubscriptionCardComponent';
 import { getSubs, getSamples } from '../../api';
 import { useNavigate } from 'react-router-dom';
@@ -15,10 +13,8 @@ function Home() {
   const [subscriptions, setSubscriptions] = useState([]);
   const [samples, setSamples] = useState([]);
   const [currentSample, setCurrentSample] = useState(samples[5]);
-  const [selectedPlan, setSelectedPlan] = useState(null);
   
   const handlePlanSelect = (plan) => {
-    setSelectedPlan(plan);
     navigate(`/form?plan=${encodeURIComponent(plan.toLowerCase())}`);
   };
   
@@ -65,7 +61,7 @@ function Home() {
           <p className={styles.text}>Our studio helps you create personalized songs, tailored to your style. Whether you're an artist, a business, or simply someone with a passion for music – it's time to own your sound</p>
 
           <div className={styles.buttonsContainer}>
-            <button type='button' className={styles.filledButton} id={styles.button}>
+            <button type='button' className={styles.filledButton} id={styles.button} onClick={() => navigate('/sign-up')}>
               <p className={styles.buttonText}>Join <br/> Today</p>
             </button>
             <button type='button' className={styles.outlinedButton} id={styles.button}>

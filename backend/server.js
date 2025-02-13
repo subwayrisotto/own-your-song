@@ -4,22 +4,20 @@ const cors = require("cors");
 const hello = require("./api/hello");
 const subs = require("./routes/subscriptions");
 const samples = require("./routes/samples");
+const payment = require("./routes/stripe");
 
 const app = express();
 const PORT = process.env.PORT || 5050;
 
-// Middleware configuration
-// const allowedOrigins = ['https://own-your-song.vercel.app', 'http://localhost:3000'];
-// app.use(cors({
-//     origin: allowedOrigins,
-//     methods: ['GET', 'POST'],
-//     credentials: true
-// }));
 app.use(cors());
 
+app.use("/webhook", express.raw({ type: "application/json" }));
 app.use(express.json());
-app.use(subs); // subcriptions route
-app.use(samples); // samples route
+
+// Routes
+app.use(subs);
+app.use(samples);
+app.use(payment);
 
 // Root route
 app.get("/", hello);
@@ -33,16 +31,15 @@ app.use((err, req, res, next) => {
 // Database connection
 (async () => {
     try {
-        // Connect to the database before handling requests
         await connect.connectToServer();
-        console.log("Successfully connected to the database");
+        console.log("✅ Successfully connected to the database");
         app.listen(PORT, () => {
-            console.log(`Server is running on port ${PORT}`);
+            console.log(`🚀 Server is running on port ${PORT}`);
         });
     } catch (err) {
-        console.error("Failed to connect to the database:", err);
+        console.error("❌ Failed to connect to the database:", err);
     }
 })();
 
-// Export the app for Vercel
+
 module.exports = app;

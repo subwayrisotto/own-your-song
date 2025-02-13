@@ -4,19 +4,19 @@ const inputsData = {
             title: '',
             placeholder: 'A funny story (e.g., “how we lost our car in the parking lot”)...',
             type: 'text',
-            variableName: 'funnyStory'
+            variableName: 'funnyStory',
         }, 
         {
             title: '',
             placeholder: 'Character traits (e.g., “always supportive and inspiring”)...',
             type: 'text',
-            variableName: 'characterTraits'
+            variableName: 'characterTraits',
         }, 
         {
             title: '',
             placeholder: 'Hobbies or dreams (e.g., “dreams of seeing Paris”)...',
             type: 'text',
-            variableName: 'hobbies'
+            variableName: 'hobbies',
         },
     ],
     step2: [ 
@@ -24,25 +24,25 @@ const inputsData = {
             title: 'Write your e-mail',
             placeholder: 'e.g., johnsmith@outlook.com',
             type: 'email',
-            variableName: 'email'
+            variableName: 'email',
         }, 
         {
             title: 'What’s your name?',
             placeholder: 'e.g., John Smith',
             type: 'text',
-            variableName: 'name'
+            variableName: 'name',
         }, 
         {
             title: 'Recipient’s Name',
             placeholder: 'e.g., Monica Smith',
             type: 'text',
-            variableName: 'recipient'
+            variableName: 'recipient',
         },
         {
             title: 'Who is this person to you?',
             placeholder: 'e.g., wife, daughter, friend',
             type: 'text',
-            variableName: 'recipientRole'
+            variableName: 'recipientRole',
         },
     ],
     step3: [ 

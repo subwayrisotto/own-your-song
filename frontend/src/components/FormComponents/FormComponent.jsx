@@ -30,8 +30,10 @@ const Form = () => {
       return;
     }
     setSelectedType(typeSelected);
-    navigate(`/form?plan=${encodeURIComponent(selectedPlan)}&type=${encodeURIComponent(typeSelected.toLowerCase())}`);
+    // Add step=1 to the URL when the type is selected
+    navigate(`/form?plan=${encodeURIComponent(selectedPlan)}&type=${encodeURIComponent(typeSelected.toLowerCase())}&step=1`);
   };
+  
 
   // Set page height dynamically based on footer
   const setPageHeight = () => {

@@ -3,20 +3,19 @@ import styles from './FormStep5.module.scss';
 import { useSearchParams } from "react-router-dom";
 
 const SilverDateCtn = (props) => {
-  const {formData} = props;
-  return(
+  const { formData } = props;
+  return (
     <div className={styles.silverDateCtn}>
       <p className={styles.headerText}>You'll receive your order in 24 hours! </p>
     </div>
   )
 }
 
-function FormStep5(props) {
-  const {formData} = props;
+function FormStep5({ formData, setFormData }) {
   const [searchParams] = useSearchParams();
   const [deliveryDates, setDeliveryDates] = useState([]);
   const [rushValue, setRushValue] = useState(0);
-  const [activeIndex, setActiveIndex] = useState(null);  
+  const [activeIndex, setActiveIndex] = useState(null);
   const planFromUrl = searchParams.get("plan");
 
   const rushDayFee = {
@@ -47,7 +46,18 @@ function FormStep5(props) {
     const fee = rushDayFee[planFromUrl]?.[index + 1];
     if (fee !== 'disabled') {
       setRushValue(fee);
-      setActiveIndex(index); 
+      setActiveIndex(index);
+
+      // Save data to sessionStorage
+      setFormData((prevData) => {
+        const updatedData = {
+          ...prevData,
+          dateDelivery: `${deliveryDates[index].month} ${deliveryDates[index].day}`,
+          rushDeliveryFee: fee
+        };
+        sessionStorage.setItem("formData", JSON.stringify(updatedData));
+        return updatedData;
+      });
     }
   };
 
@@ -63,7 +73,7 @@ function FormStep5(props) {
         day: nextDay.getDate(),
         month: nextDay.toLocaleDateString("en-US", { month: "short" }),
         weekday: nextDay.toLocaleDateString("en-US", { weekday: "short" }),
-        rushFee: rushDayFee[planFromUrl]?.[i + 1], 
+        rushFee: rushDayFee[planFromUrl]?.[i + 1],
       };
 
       days.push(formattedDay);
@@ -78,8 +88,18 @@ function FormStep5(props) {
 
     const firstZeroFeeIndex = days.findIndex(date => date.rushFee === 0);
     if (firstZeroFeeIndex !== -1) {
-      setActiveIndex(firstZeroFeeIndex); 
-      setRushValue(0); 
+      setActiveIndex(firstZeroFeeIndex);
+      setRushValue(0);
+    }
+
+    // Check sessionStorage for saved data on initial load
+    const storedData = JSON.parse(sessionStorage.getItem("formData"));
+    if (storedData && storedData.dateDelivery) {
+      const storedIndex = days.findIndex(date => `${date.month} ${date.day}` === storedData.dateDelivery);
+      if (storedIndex !== -1) {
+        setActiveIndex(storedIndex);
+        setRushValue(storedData.rushDeliveryFee || 0);
+      }
     }
 
     const interval = setInterval(() => {
@@ -87,7 +107,7 @@ function FormStep5(props) {
     }, 24 * 60 * 60 * 1000); // 24 hours in milliseconds
 
     return () => clearInterval(interval);
-  }, [planFromUrl]); 
+  }, [planFromUrl]);
 
   return (
     planFromUrl === "silver" ? (
@@ -99,16 +119,16 @@ function FormStep5(props) {
           <p className={styles.descriptionText}>
             We understand that sometimes you need things done faster. With our express service options, you can reduce waiting times and get your order completed sooner.
           </p>
-    
+
           <ul className={styles.dateList}>
             {deliveryDates.map((date, index) => {
               const isDisabled = date.rushFee === 'disabled';
-              const isActive = activeIndex === index && date.rushFee === 0; 
-    
+              const isActive = activeIndex === index;
+
               return (
                 <li
                   key={index}
-                  className={`${styles.dateListItem} ${isDisabled ? styles.isDisabled : ''} ${isActive ? styles.active : ''}`} // Apply active class if matched
+                  className={`${styles.dateListItem} ${isDisabled ? styles.isDisabled : ''} ${isActive ? styles.active : ''}`}
                   onClick={() => {
                     if (!isDisabled) {
                       handleRushFeeValue(index);
@@ -123,12 +143,12 @@ function FormStep5(props) {
               );
             })}
           </ul>
-    
+
           <div className={styles.rushServiceCtn}>
             <p className={styles.rushText}>Rush service fee for song delivery:</p>
             <p className={styles.rushValue}>{rushValue === 'disabled' ? 'Not available' : `${rushValue}$`}</p>
           </div>
-    
+
           <p className={styles.descriptionText}>
             Delivery of your song will be completed by the end of the day (UTC) on the specified date.
           </p>
@@ -137,7 +157,7 @@ function FormStep5(props) {
         <div>Loading...</div>
       )
     )
-  )
+  );
 }
 
 export default FormStep5;

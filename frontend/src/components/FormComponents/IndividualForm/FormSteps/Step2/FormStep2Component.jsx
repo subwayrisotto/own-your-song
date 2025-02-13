@@ -3,7 +3,7 @@ import inputsData from '../../../../../data/inputsData';
 import DefaultInput from '../../../../InputComponents/DefaultInputComponent/DefaultInputComponent';
 import styles from './FormStep.module.scss';
 
-function FormStep2({formData, setFormData}) {
+function FormStep2({formData, setFormData, errors}) {
   return (
     <div className={styles.stepCtn}>
       <div className={styles.inputsCtn}>
@@ -17,7 +17,12 @@ function FormStep2({formData, setFormData}) {
                     <label htmlFor={`${styles.inputArea}${index}`} className={styles.label}>{input.title}</label>
                   )
                 }
-                 <DefaultInput {...input} formData={formData} setFormData={setFormData}/>
+                 <DefaultInput 
+                    {...input} 
+                    formData={formData} 
+                    setFormData={setFormData}
+                    errorMessage={errors?.[input.variableName]?.message || errors?.[input.variableName]}
+                  />
               </div>
             )
           })

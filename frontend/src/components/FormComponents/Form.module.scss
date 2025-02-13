@@ -4,10 +4,11 @@
 
 .container{
     width: 100%;
-    // height: 100%;
-    // padding-bottom: 100px;
     padding: 130px 0 50px;
     background: $color-midnight-violet;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
 }
 
@@ -22,3 +23,53 @@
     align-items: center;
 }
 
+.btnCtn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.headerText{
+    text-align: center;
+    margin-bottom: 30px;
+    font-family: 'Inter';
+    font-size: 40px;
+    font-weight: 500;
+    color: $color-white;
+}
+
+.button {
+    width: 200px;
+    height: 150px;
+    cursor: pointer;
+    background: linear-gradient(180deg, rgba(217, 217, 217, 0.38) 0%, rgba(126, 126, 126, 0.057) 100%);
+    background-color: transparent;
+    box-shadow: 
+        inset 0px 3px 7.8px 2px rgba(255, 255, 255, 0.17),
+        0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    outline: none;
+    border: none;
+    border-radius: 14px;
+    font-family: 'Inter';
+    font-size: 24px;
+    color: $color-white;
+    transition: 
+        background 0.4s ease-in-out, 
+        transform 0.3s ease-in-out, 
+        box-shadow 0.4s ease-in-out;
+
+    &:hover {
+        background: linear-gradient(180deg, #A49BAF 0%, #7E758A 100%);
+        transform: scale(.99);
+        box-shadow: 
+            inset 0px 3px 7px rgba(255, 255, 255, 0.3),
+            0px 6px 12px rgba(0, 0, 0, 0.4);
+    }
+}
+
+
+
+
+
+   

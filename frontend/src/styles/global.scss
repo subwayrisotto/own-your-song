@@ -51,3 +51,22 @@ a{
     }
 }
 
+.container {
+    background-color: $color-midnight-violet;
+    width: 100%;
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+}
+
+
+.ctn {
+    max-width: 1440px;
+    width: 100%;
+    margin: 0 auto;
+    // padding: 170px 10px 50px 10px; 
+    display: flex;
+    flex-direction: column; 
+    justify-content: center;
+    align-items: center;
+}

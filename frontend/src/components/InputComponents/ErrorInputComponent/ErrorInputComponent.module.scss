@@ -1,0 +1,19 @@
+.errorMessages{
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 5px;
+
+    img{
+        width: 14px;
+        aspect-ratio: 1/1;
+    }
+}
+
+.errorText{
+    font-family: 'Inter';
+    font-size: 14px;
+    font-weight: 300;
+    color: red;
+}
