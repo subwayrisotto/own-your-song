@@ -9,7 +9,7 @@ const handleErrors = (fn) => (req, res, next) => {
     Promise.resolve(fn(req, res, next)).catch(next);
 };
 
-// Retrieve all subscriptions
+// Retrieve all samples
 samplesRoutes.route("/samples").get(
     handleErrors(async (req, res) => {
         let db = database.getDB();
@@ -22,7 +22,7 @@ samplesRoutes.route("/samples").get(
     })
 );
 
-// Retrieve a single subscription by ID
+// Retrieve a single sample by ID
 samplesRoutes.route("/samples/:id").get(
     handleErrors(async (req, res) => {
         let db = database.getDB();
@@ -30,12 +30,12 @@ samplesRoutes.route("/samples/:id").get(
         if (data) {
             res.json(data);
         } else {
-            res.status(404).json({ message: "Samples not found." });
+            res.status(404).json({ message: "Sample not found." });
         }
     })
 );
 
-// Create a new subscription
+// Create a new sample
 samplesRoutes.route("/samples").post(
     handleErrors(async (req, res) => {
         let db = database.getDB();
@@ -53,7 +53,7 @@ samplesRoutes.route("/samples").post(
     })
 );
 
-// Update a subscription by ID
+// Update a sample by ID
 samplesRoutes.route("/samples/:id").put(
     handleErrors(async (req, res) => {
         let db = database.getDB();
@@ -81,7 +81,7 @@ samplesRoutes.route("/samples/:id").put(
     })
 );
 
-// Delete a subscription by ID
+// Delete a sample by ID
 samplesRoutes.route("/samples/:id").delete(
     handleErrors(async (req, res) => {
         let db = database.getDB();
