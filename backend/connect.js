@@ -1,9 +1,9 @@
 const { MongoClient } = require("mongodb");
-require("dotenv").config({ path: "./config.env" });
+require("dotenv").config();
 
-const dbURI = process.env.ATLAS_URI; // Ensure ATLAS_URI is correct in config.env
+const dbURI = process.env.MONGODB_URI; // Ensure MONGODB_URI is correct in config.env
 if (!dbURI) {
-    throw new Error("ATLAS_URI is not defined in config.env");
+    throw new Error("MONGODB_URI is not defined in .env");
 }
 
 const client = new MongoClient(dbURI);
@@ -16,6 +16,7 @@ module.exports = {
             await client.connect();
             console.log("Successfully connected to MongoDB");
             database = client.db("OYS_DB"); // You can replace OYS_DB with your actual database name
+            return database;
         } catch (err) {
             console.error("Error connecting to MongoDB:", err);
             throw err; // Re-throw the error to handle it in your app logic
