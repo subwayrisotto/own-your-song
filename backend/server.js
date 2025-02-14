@@ -20,7 +20,7 @@ app.use(samples);
 app.use(payment);
 
 // Root route
-app.get("/api/hello", hello);
+app.get("/", hello);
 
 // Centralized error handling
 app.use((err, req, res, next) => {
