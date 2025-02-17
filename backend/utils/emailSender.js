@@ -10,11 +10,12 @@ const transporter = nodemailer.createTransport({
         pass: process.env.SMTP_PASS
     }
 });
-
 // Function to send an email
 async function sendEmail(to, subject, html) {
     try {
-        await transporter.sendMail({
+        console.log(`Preparing to send email to ${to}`);  // This will log before the sendMail call
+        
+        const info = await transporter.sendMail({
             from: `"Own Your Song" <${process.env.SMTP_USER}>`,
             to,
             subject,
@@ -23,7 +24,7 @@ async function sendEmail(to, subject, html) {
         console.log(`📩 Email sent to ${to}`);
     } catch (error) {
         console.error(`❌ Error sending email to ${to}:`, error);
+        throw new Error(error); // Re-throw to catch it in the calling function
     }
 }
-
 module.exports = { sendEmail };

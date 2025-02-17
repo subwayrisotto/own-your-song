@@ -31,8 +31,10 @@ app.use((err, req, res, next) => {
 // Database connection
 (async () => {
     try {
-        await connect.connectToServer();
+        await connect.connectToServer(); // Mongoose connection
         console.log("✅ Successfully connected to the database");
+
+        // Start the server after successful DB connection
         app.listen(PORT, () => {
             console.log(`🚀 Server is running on port ${PORT}`);
         });
@@ -40,6 +42,5 @@ app.use((err, req, res, next) => {
         console.error("❌ Failed to connect to the database:", err);
     }
 })();
-
 
 module.exports = app;

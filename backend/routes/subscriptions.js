@@ -1,6 +1,5 @@
 const express = require("express");
-const database = require("../connect");
-const { ObjectId } = require("mongodb");
+const Subscription = require("../models/Subscription"); // Import the model
 
 let subRoutes = express.Router();
 
@@ -12,10 +11,10 @@ const handleErrors = (fn) => (req, res, next) => {
 // Retrieve all subscriptions
 subRoutes.route("/subscriptions").get(
     handleErrors(async (req, res) => {
-        let db = database.getDB();
-        let data = await db.collection("Subscriptions ").find({}).toArray();
-        if (data.length > 0) {
-            res.json(data);
+        const subscriptions = await Subscription.find();
+
+        if (subscriptions.length > 0) {
+            res.json(subscriptions);
         } else {
             res.status(404).json({ message: "No subscriptions found." });
         }
@@ -25,10 +24,9 @@ subRoutes.route("/subscriptions").get(
 // Retrieve a single subscription by ID
 subRoutes.route("/subscriptions/:id").get(
     handleErrors(async (req, res) => {
-        let db = database.getDB();
-        let data = await db.collection("Subscriptions ").findOne({ _id: new ObjectId(req.params.id) });
-        if (data) {
-            res.json(data);
+        const subscription = await Subscription.findById(req.params.id); // Using Mongoose's `findById` method
+        if (subscription) {
+            res.json(subscription);
         } else {
             res.status(404).json({ message: "Subscription not found." });
         }
@@ -38,7 +36,6 @@ subRoutes.route("/subscriptions/:id").get(
 // Create a new subscription
 subRoutes.route("/subscriptions").post(
     handleErrors(async (req, res) => {
-        let db = database.getDB();
         const { plan, price, description, benefits } = req.body;
 
         // Validate input
@@ -46,17 +43,21 @@ subRoutes.route("/subscriptions").post(
             return res.status(400).json({ message: "Missing required fields." });
         }
 
-        let mongoObject = { plan, price, description, benefits };
-        let data = await db.collection("Subscriptions ").insertOne(mongoObject);
+        const newSubscription = new Subscription({
+            plan,
+            price,
+            description,
+            benefits,
+        });
 
-        res.status(201).json(data);
+        const savedSubscription = await newSubscription.save(); // Save the new subscription to the database
+        res.status(201).json(savedSubscription);
     })
 );
 
 // Update a subscription by ID
 subRoutes.route("/subscriptions/:id").put(
     handleErrors(async (req, res) => {
-        let db = database.getDB();
         const { plan, price, description, benefits } = req.body;
 
         // Validate input
@@ -64,30 +65,26 @@ subRoutes.route("/subscriptions/:id").put(
             return res.status(400).json({ message: "Missing required fields." });
         }
 
-        let mongoObject = {
-            $set: { plan, price, description, benefits },
-        };
-
-        let data = await db.collection("Subscriptions ").updateOne(
-            { _id: new ObjectId(req.params.id) },
-            mongoObject
+        const updatedSubscription = await Subscription.findByIdAndUpdate(
+            req.params.id,
+            { plan, price, description, benefits },
+            { new: true } // Returns the updated document
         );
 
-        if (data.matchedCount === 0) {
+        if (!updatedSubscription) {
             return res.status(404).json({ message: "Subscription not found." });
         }
 
-        res.json(data);
+        res.json(updatedSubscription);
     })
 );
 
 // Delete a subscription by ID
 subRoutes.route("/subscriptions/:id").delete(
     handleErrors(async (req, res) => {
-        let db = database.getDB();
-        let data = await db.collection("Subscriptions ").deleteOne({ _id: new ObjectId(req.params.id) });
+        const deletedSubscription = await Subscription.findByIdAndDelete(req.params.id);
 
-        if (data.deletedCount === 0) {
+        if (!deletedSubscription) {
             return res.status(404).json({ message: "Subscription not found." });
         }
 

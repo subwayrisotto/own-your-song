@@ -1,6 +1,5 @@
 const express = require("express");
-const database = require("../connect");
-const { ObjectId } = require("mongodb");
+const Sample = require("../models/Sample"); // Import the Sample model
 
 let samplesRoutes = express.Router();
 
@@ -12,10 +11,9 @@ const handleErrors = (fn) => (req, res, next) => {
 // Retrieve all samples
 samplesRoutes.route("/samples").get(
     handleErrors(async (req, res) => {
-        let db = database.getDB();
-        let data = await db.collection("Samples").find({}).toArray();
-        if (data.length > 0) {
-            res.json(data);
+        const samples = await Sample.find(); // Mongoose query to find all samples
+        if (samples.length > 0) {
+            res.json(samples);
         } else {
             res.status(404).json({ message: "No samples found." });
         }
@@ -25,10 +23,9 @@ samplesRoutes.route("/samples").get(
 // Retrieve a single sample by ID
 samplesRoutes.route("/samples/:id").get(
     handleErrors(async (req, res) => {
-        let db = database.getDB();
-        let data = await db.collection("Samples").findOne({ _id: new ObjectId(req.params.id) });
-        if (data) {
-            res.json(data);
+        const sample = await Sample.findById(req.params.id); // Mongoose query to find by ID
+        if (sample) {
+            res.json(sample);
         } else {
             res.status(404).json({ message: "Sample not found." });
         }
@@ -38,7 +35,6 @@ samplesRoutes.route("/samples/:id").get(
 // Create a new sample
 samplesRoutes.route("/samples").post(
     handleErrors(async (req, res) => {
-        let db = database.getDB();
         const { name, title, source, cover } = req.body;
 
         // Validate input
@@ -46,17 +42,16 @@ samplesRoutes.route("/samples").post(
             return res.status(400).json({ message: "Missing required fields." });
         }
 
-        let mongoObject = { name, title, source, cover };
-        let data = await db.collection("Samples").insertOne(mongoObject);
+        const newSample = new Sample({ name, title, source, cover });
+        const savedSample = await newSample.save(); // Mongoose method to save the new sample
 
-        res.status(201).json(data);
+        res.status(201).json(savedSample);
     })
 );
 
 // Update a sample by ID
 samplesRoutes.route("/samples/:id").put(
     handleErrors(async (req, res) => {
-        let db = database.getDB();
         const { name, title, source, cover } = req.body;
 
         // Validate input
@@ -64,30 +59,26 @@ samplesRoutes.route("/samples/:id").put(
             return res.status(400).json({ message: "Missing required fields." });
         }
 
-        let mongoObject = {
-            $set: { name, title, source, cover },
-        };
-
-        let data = await db.collection("Samples").updateOne(
-            { _id: new ObjectId(req.params.id) },
-            mongoObject
+        const updatedSample = await Sample.findByIdAndUpdate(
+            req.params.id,
+            { name, title, source, cover },  // Fields to update
+            { new: true } // Return the updated document
         );
 
-        if (data.matchedCount === 0) {
+        if (!updatedSample) {
             return res.status(404).json({ message: "Sample not found." });
         }
 
-        res.json(data);
+        res.json(updatedSample);
     })
 );
 
 // Delete a sample by ID
 samplesRoutes.route("/samples/:id").delete(
     handleErrors(async (req, res) => {
-        let db = database.getDB();
-        let data = await db.collection("Samples").deleteOne({ _id: new ObjectId(req.params.id) });
+        const deletedSample = await Sample.findByIdAndDelete(req.params.id); // Mongoose delete method
 
-        if (data.deletedCount === 0) {
+        if (!deletedSample) {
             return res.status(404).json({ message: "Sample not found." });
         }
 
