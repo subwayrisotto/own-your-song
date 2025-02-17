@@ -9,7 +9,7 @@ const customerEmailTemplate = require("../emails/customerEmailTemplate");
 const adminEmailTemplate = require("../emails/adminEmailTemplate");
 
 const paymentRoutes = express.Router();
-const URL = process.env.LOCAL_URL || "http://localhost:3000";
+const URL = process.env.REACT_APP_FRONTEND_URL || "http://localhost:3000";
 
 // Service functions to abstract logic
 async function saveFormDataToDb(formData) {
