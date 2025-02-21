@@ -22,6 +22,12 @@ const navigation = [
         name: "Contact",
         navigateTo: "/contact",
         isActive: false,
+    },
+    {
+        id: 5, 
+        name: "Dashboard",
+        navigateTo: "/dashboard",
+        isActive: false,
     }
 ];
 

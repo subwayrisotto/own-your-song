@@ -27,6 +27,12 @@ const inputsData = {
             variableName: 'email',
         }, 
         {
+            title: 'Confirm your e-mail',
+            placeholder: 'e.g., johnsmith@outlook.com',
+            type: 'email',
+            variableName: 'confirmEmail',
+        }, 
+        {
             title: 'What’s your name?',
             placeholder: 'e.g., John Smith',
             type: 'text',

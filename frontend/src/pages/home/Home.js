@@ -5,6 +5,7 @@ import contactDetails from '../../data/contact-details';
 import SubscriptionCard from '../../components/SubscriptionCardComponent/SubscriptionCardComponent';
 import { getSubs, getSamples } from '../../api';
 import { useNavigate } from 'react-router-dom';
+import VinylLoader from '../../components/VinylLoaderComponent/VinylLoader';
 
 function Home() {
   const navigate = useNavigate();
@@ -13,6 +14,7 @@ function Home() {
   const [subscriptions, setSubscriptions] = useState([]);
   const [samples, setSamples] = useState([]);
   const [currentSample, setCurrentSample] = useState(samples[5]);
+  const [loading, setLoading] = useState(false);
   
   const handlePlanSelect = (plan) => {
     navigate(`/form?plan=${encodeURIComponent(plan.toLowerCase())}`);
@@ -30,6 +32,8 @@ function Home() {
       }
     }
     loadDataFromDb()
+
+    if(loadDataFromDb()) setLoading(true)
   }, [])
 
   const handleClick = id => {
@@ -64,7 +68,7 @@ function Home() {
             <button type='button' className={styles.filledButton} id={styles.button} onClick={() => navigate('/sign-up')}>
               <p className={styles.buttonText}>Join <br/> Today</p>
             </button>
-            <button type='button' className={styles.outlinedButton} id={styles.button}>
+            <button type='button' className={styles.outlinedButton} id={styles.button} onClick={() => navigate('/sign-in')}>
               <p className={styles.buttonText}>Sign In</p>
             </button>
           </div>
@@ -75,11 +79,15 @@ function Home() {
           
           <div className={styles.subList}>
             {
-              subscriptions.map((sub, index) => {
-                return(
-                  <SubscriptionCard {...sub} key={index} handlePlanSelect={handlePlanSelect}/>
-                )
-              })
+              loading ? (
+                
+                  subscriptions.map((sub, index) => {
+                    return(
+                      <SubscriptionCard {...sub} key={index} handlePlanSelect={handlePlanSelect}/>
+                    )
+                  })
+                
+              ) : <VinylLoader />
             }
           </div>
         </div>
@@ -88,37 +96,44 @@ function Home() {
           <p className={styles.headerText}>OUR SAMPLES</p>
           
           <div className={styles.samplesContent}>
-            <ul className={styles.samplesList}>
-              {
-                samples.map((sample, index) => {
-                  return (
-                    <li className={
-                      sample === currentSample
-                        ? styles.samplesListItem + " " + styles.active
-                        : styles.samplesListItem
-                    } key={index} onClick={() => {
-                      handleClick(index);
-                      setCurrentSampleIndex(index)
-                    }}>
-                      <div className={styles.sampleDetails}>
-                        <p className={styles.sampleName}>{sample.name} - {sample.title}</p>
-                      </div>
-                    </li>
-                  )
-                })
-              }
-            </ul>
+            {
+              loading ? (
+                <>
+                  <ul className={styles.samplesList}>
+                    {
+                      samples.map((sample, index) => {
+                        return (
+                          <li className={
+                            sample === currentSample
+                              ? styles.samplesListItem + " " + styles.active
+                              : styles.samplesListItem
+                          } key={index} onClick={() => {
+                            handleClick(index);
+                            setCurrentSampleIndex(index)
+                          }}>
+                            <div className={styles.sampleDetails}>
+                              <p className={styles.sampleName}>{sample.name} - {sample.title}</p>
+                            </div>
+                          </li>
+                        )
+                      })
+                    }
+                  </ul>
 
-            <div className={styles.samplePlayer}>
-              {currentSample && (
-                <PlayerComponent
-                  sample={currentSample}
-                  handleNextSample={handleNextSample}
-                  handlePrevSample={handlePrevSample}
-                  currentSampleIndex={currentSampleIndex}
-                />
-              )}
-            </div>
+                  <div className={styles.samplePlayer}>
+                    {currentSample && (
+                      <PlayerComponent
+                        sample={currentSample}
+                        handleNextSample={handleNextSample}
+                        handlePrevSample={handlePrevSample}
+                        currentSampleIndex={currentSampleIndex}
+                      />
+                    )}
+                  </div>
+                </>    
+              ) : <VinylLoader />
+            }
+            
           </div>
         </div>
 

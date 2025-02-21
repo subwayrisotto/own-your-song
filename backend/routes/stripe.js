@@ -7,6 +7,8 @@ const { getDB } = require("../connect");
 const { sendEmail } = require("../utils/emailSender");
 const customerEmailTemplate = require("../emails/customerEmailTemplate");
 const adminEmailTemplate = require("../emails/adminEmailTemplate");
+const jwt = require("jsonwebtoken");
+const Order = require('../models/Order')
 
 const paymentRoutes = express.Router();
 const URL = process.env.REACT_APP_FRONTEND_URL || "http://localhost:3000";
@@ -27,8 +29,19 @@ async function saveFormDataToDb(formData) {
     }
 }
 
+// Function to get the userId from a JWT token
+async function getUserIdFromToken(token) {
+    try {
+        const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);  // Use the secret key to verify the token
+        return decoded.userId;  // Assuming the token contains the userId
+    } catch (error) {
+        console.error("Error decoding token:", error);
+        throw new Error("Authentication failed");
+    }
+}
+
 // Create Checkout Session
-async function createCheckoutSession({ totalAmount, email, name, orderDetails, formDataId }) {
+async function createCheckoutSession({ totalAmount, email, name, orderDetails, formDataId, userId, guestToken }) {
     try {
         const session = await stripe.checkout.sessions.create({
             payment_method_types: ["card"],
@@ -54,7 +67,9 @@ async function createCheckoutSession({ totalAmount, email, name, orderDetails, f
                 customer_name: name,
                 customer_email: email,
                 formDataId,
-                ...orderDetails
+                userId: userId || "null",  // Only pass userId if the user is logged in
+                guestToken: guestToken || null,  // Set guestToken when no userId
+                ...orderDetails,
             },
         });
         return session;
@@ -65,13 +80,13 @@ async function createCheckoutSession({ totalAmount, email, name, orderDetails, f
 }
 
 // Save Payment & Order Details
-async function savePaymentAndOrderDetails(session, formData) {
+// Save Payment & Order Details using Mongoose
+async function savePaymentAndOrderDetails(session, formData, userId, guestToken) {
     try {
-        const db = getDB();
         const orderId = `ORD-${new Date().toISOString().slice(0, 10).replace(/-/g, "")}-${uuidv4().slice(0, 6).toUpperCase()}`;
         const customerEmail = session.customer_email;
         const customerName = session.metadata.customer_name || "Customer";
-        
+
         const paymentData = {
             stripeSessionId: session.id,
             email: customerEmail,
@@ -81,25 +96,26 @@ async function savePaymentAndOrderDetails(session, formData) {
             status: session.payment_status,
             createdAt: new Date(),
         };
-        
-        const ordersCollection = db.collection("Orders");
-        const paymentsCollection = db.collection("Payments");
 
-        // Save payment and order details
+        const paymentsCollection = getDB().collection("Payments");
         await paymentsCollection.insertOne(paymentData);
-        await ordersCollection.insertOne({
-            orderId,
-            customerEmail,
-            customerName,
+
+        const orderData = {
+            userId: userId || null, // If guest, userId is null
+            guestToken: guestToken || null, // If guest, guestToken is stored
+            orderId: orderId,
+            customerEmail: customerEmail,
+            customerName: customerName,
             amount: session.amount_total / 100,
             status: session.payment_status,
-            formData,
+            formData: formData,
             createdAt: new Date(),
-        });
+        };
 
+        const order = await Order.create(orderData);  // Create the order in the database using the Order model
         console.log("✅ Payment and Order saved successfully!");
-        
-        return { customerEmail, customerName, orderId, session };
+
+        return { customerEmail, customerName, orderId, session, order };
     } catch (error) {
         console.error("Error saving payment/order:", error);
         throw new Error("Error saving payment and order details.");
@@ -138,17 +154,58 @@ async function sendConfirmationEmails({ customerEmail, customerName, orderId, se
 
 // Endpoint to create Stripe Checkout Session
 paymentRoutes.post("/checkout-session", async (req, res) => {
-    const { totalAmount, email, name, orderDetails, formData } = req.body;
+    const { totalAmount, email, name, orderDetails, formData, guestToken } = req.body;  // Receive guestToken here
+    const token = req.headers["authorization"]?.split(" ")[1];  // Get token from the Authorization header
+
+    let userId = null;
+    if (token) {
+        // Extract userId from the user token
+        userId = await getUserIdFromToken(token);
+    }
+
+    if (!token && !guestToken) {
+        return res.status(400).json({ message: "Authorization token or guest token is required." });
+    }
 
     try {
-        const formDataId = await saveFormDataToDb(formData);
-        const session = await createCheckoutSession({ totalAmount, email, name, orderDetails, formDataId });
+        const formDataId = await saveFormDataToDb(formData);  // Save form data to the DB
+        const session = await createCheckoutSession({
+            totalAmount,
+            email,
+            name,
+            orderDetails,
+            formDataId,
+            userId,
+            guestToken,  // Pass guestToken or userId
+        });
+
+        // Send response with checkout URL
         res.send({ url: session.url });
     } catch (error) {
         console.error("Error in /checkout-session:", error);
         res.status(500).send("Payment failed");
     }
 });
+
+// async function convertGuestOrderToUserOrder(userId, guestToken) {
+//     try {
+//         const orders = await Order.find({ guestToken });
+        
+//         if (!orders.length) {
+//             return { message: "No guest orders found." };
+//         }
+
+//         console.log(orders)
+
+//         // Update each order to link to the new userId
+//         await Order.updateMany({ guestToken }, { $set: { userId, guestToken: null } });
+
+//         return { message: "Guest orders converted successfully." };
+//     } catch (error) {
+//         console.error("Error converting guest orders:", error);
+//         throw new Error("Error converting guest orders to user orders.");
+//     }
+// }
 
 // Webhook endpoint for Stripe
 paymentRoutes.post("/webhook", express.raw({ type: "application/json" }), async (req, res) => {
@@ -161,6 +218,14 @@ paymentRoutes.post("/webhook", express.raw({ type: "application/json" }), async 
         const session = event.data.object;  // Stripe event session
 
         const formDataId = session.metadata?.formDataId;
+        const userId = session.metadata?.userId !== "null" ? session.metadata?.userId : null;
+        const guestToken = session.metadata?.guestToken;
+
+        // // Check if the user is logged in and if there was a guest order
+        // if (userId && guestToken) {
+        //     // Convert guest order to user order
+        //     await convertGuestOrderToUserOrder(userId, guestToken);  // Pass userId and guestToken
+        // }
 
         if (formDataId) {
             const db = getDB();
@@ -168,7 +233,7 @@ paymentRoutes.post("/webhook", express.raw({ type: "application/json" }), async 
         }
 
         if (event.type === "checkout.session.completed") {
-            const { customerEmail, customerName, orderId, session: paymentSession } = await savePaymentAndOrderDetails(session, formData);
+            const { customerEmail, customerName, orderId, session: paymentSession } = await savePaymentAndOrderDetails(session, formData, userId, guestToken);
             await sendConfirmationEmails({ customerEmail, customerName, orderId, session: paymentSession, formData });
         }
 

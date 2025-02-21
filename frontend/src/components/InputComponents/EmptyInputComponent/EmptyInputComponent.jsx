@@ -1,55 +1,50 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styles from './EmptyInputComponent.module.scss';
 import ErrorInput from '../ErrorInputComponent/ErrorInputComponent';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-regular-svg-icons';
+import { faEnvelope, faUserLarge } from '@fortawesome/free-solid-svg-icons';
 
-const EmptyInput = (props) => {
-    const { type, errorMessage, placeholder } = props;
-    const [currentValue, setCurrentValue] = useState('');
-    const [localError, setLocalError] = useState(errorMessage);
+const EmptyInput = ({ type, errorMessage, placeholder, value, onChange }) => {
     const [showPassword, setShowPassword] = useState(false);
 
-    useEffect(() => {
-        setLocalError(errorMessage);
-    }, [errorMessage]);
-
-    const handleChange = (e) => {
-        const value = e.target.value;
-        setCurrentValue(value);
-        setLocalError(null); 
+    const handlePasswordToggle = () => {
+        setShowPassword((prev) => !prev);
     };
 
-    const handlePasswordToggle = () => {
-        setShowPassword((prev) => !prev); 
+    const setInputIcon = () => {
+        switch (type) {
+            case 'password':
+                return showPassword ? <FontAwesomeIcon icon={faEye} /> : <FontAwesomeIcon icon={faEyeSlash} />;
+            case 'text':
+                return <FontAwesomeIcon icon={faUserLarge} />;
+            case 'email':
+                return <FontAwesomeIcon icon={faEnvelope} />;
+            default:
+                return null;
+        }
     };
 
     return (
         <div className={styles.inputCtn}>
             <div className={styles.inputWrapper}>
                 <input
-                    type={showPassword ? 'text' : type} 
-                    className={`${styles.inputArea} ${localError ? styles.errorInput : ''}`}
-                    value={currentValue}
+                    type={showPassword && type === "password" ? "text" : type}
+                    className={`${styles.inputArea} ${errorMessage ? styles.errorInput : ''}`}
+                    value={value} 
                     placeholder={placeholder}
-                    onChange={handleChange}
+                    onChange={onChange} 
                     required
                 />
-                {type === 'password' && (
-                    <button
-                        type="button"
-                        onClick={handlePasswordToggle}
-                        className={styles.passwordToggleBtn}
-                    >
-                        {
-                            showPassword 
-                                ? <FontAwesomeIcon icon={faEye} />
-                                : <FontAwesomeIcon icon={faEyeSlash} />
-                        }  
-                    </button>
-                )}
+                <button
+                    type="button"
+                    onClick={type === "password" ? handlePasswordToggle : undefined} 
+                    className={styles.iconBtn}
+                >
+                    {setInputIcon()}
+                </button>
             </div>
-            {localError && <ErrorInput errorMessage={localError} />}
+            {errorMessage && <ErrorInput errorMessage={errorMessage} />} {/* Display Error */}
         </div>
     );
 };

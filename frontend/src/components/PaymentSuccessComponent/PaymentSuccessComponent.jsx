@@ -4,10 +4,12 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ReadOnlyInput from '../InputComponents/ReadOnlyComponent/ReadOnlyInputComponent';
 import styles from './PaymentSuccess.module.scss';
+import { useUser } from '../../context/UserContext';
 
 function PaymentSuccess() {
   const savedData = JSON.parse(sessionStorage.getItem("formData"));
   const { email } = savedData;
+  const {currentUser} = useUser();
   const navigation = useNavigate();
 
   const setPageHeight = () => {
@@ -23,7 +25,7 @@ function PaymentSuccess() {
   };
 
   const handleClick = () => {
-    navigation('/sign-up', { state: { email } });
+    navigation(currentUser ? '/dashboard' : '/sign-up');
   }
 
   useEffect(() => {
@@ -46,14 +48,24 @@ function PaymentSuccess() {
             <p>Payment was successful!</p>
           </div>
 
-          <div className={styles.signUpCtn}>
-            <p className={styles.signUpText}>Finish your registration: </p>
-            <ReadOnlyInput text={email} />
-            <button type="button" onClick={handleClick} className={styles.formButton}>
-              <span>Sign Up</span>
-            </button>
-          </div>
-          </div>
+          {
+            currentUser ? (
+                <div className={styles.signUpCtn}>
+                  <button type="button" onClick={handleClick} className={styles.formButton}>
+                    <span>Go to Dashboard</span>
+                  </button>
+                </div>
+            ) : (
+              <div className={styles.signUpCtn}>
+                <p className={styles.signUpText}>Finish your registration: </p>
+                <ReadOnlyInput text={email} />
+                <button type="button" onClick={handleClick} className={styles.formButton}>
+                  <span>Sign Up</span>
+                </button>
+              </div>
+            )
+          }
+        </div>
       </div>
     </div>
   )

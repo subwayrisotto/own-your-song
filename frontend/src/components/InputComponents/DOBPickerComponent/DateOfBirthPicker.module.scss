@@ -1,0 +1,86 @@
+
+  .dob {
+    display: flex;
+    justify-content: space-around;
+    gap: 10px;
+    width: 100%;
+  }
+  
+  .daysCtn, .monthsCtn, .yearsCtn {
+    width: 33%;
+    position: relative;
+  }
+  
+  .placeholder {
+    width: 100%;
+    background: rgba(160, 160, 160, 0.29);
+    border-radius: 14px;
+    padding: 18px 15px;
+    font-size: 15px;
+    color: #fff;
+    font-family: "Inter";
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.3s ease, background 0.3s ease;
+  
+    &:hover {
+      background: rgba(217, 217, 217, 0.5);
+    }
+  
+    &.open {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+      border-bottom: 1px solid rgba(217, 217, 217, 0.5);
+  
+    }
+  }
+  
+  .arrow {
+    transition: transform 0.3s ease;
+  
+    &.rotated {
+      transform: rotate(180deg);
+    }
+  }
+  
+  .dropdown {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
+    border-bottom-left-radius: 14px;
+    border-bottom-right-radius: 14px;
+  
+    &.open {
+      max-height: 300px; 
+      overflow-y: auto;
+    }
+  }
+  
+  .dropdownItem {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 25px;
+    width: 100%;
+    background: rgba(160, 160, 160, 0.29);
+    padding: 18px 15px;
+    font-size: 15px;
+    color: #fff;
+    font-family: "Inter";
+    border-bottom: 1px solid rgba(217, 217, 217, 0.5);
+    transition: background 0.3s ease, transform 0.3s ease;
+    cursor: pointer;
+  
+    &:hover {
+      background: rgba(217, 217, 217, 0.5);
+    //   transform: scale(1.05);
+    }
+  
+    &:last-child {
+      border-bottom: 0;
+      border-bottom-left-radius: 14px;
+      border-bottom-right-radius: 14px;
+    }
+  }

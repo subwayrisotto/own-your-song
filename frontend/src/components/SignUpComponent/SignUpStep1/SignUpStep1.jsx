@@ -1,21 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import EmptyInput from '../../InputComponents/EmptyInputComponent/EmptyInputComponent';
 import ReadOnlyInput from '../../InputComponents/ReadOnlyComponent/ReadOnlyInputComponent';
-import styles from './SignUpStep1.module.scss'
+import styles from './SignUpStep1.module.scss';
 
-function SignUpStep1({ email }) {
-    const [inputEmail, setInputEmail] = useState(email || ""); 
-    const [password, setPassword] = useState(""); 
-    const [confirmPassword, setConfirmPassword] = useState(""); 
+function SignUpStep1({ signUpData, setSignUpData, errors }) {
+    // **Retrieve email from sessionStorage if available, otherwise use props**
+    const storedEmail = JSON.parse(sessionStorage.getItem("formData"))?.email || signUpData.email;
+    const [inputEmail, setInputEmail] = useState(storedEmail);
 
     useEffect(() => {
-        if (inputEmail) {
-            localStorage.setItem("email", inputEmail);
+        if (storedEmail) {
+            setSignUpData(prevData => ({ ...prevData, email: storedEmail }));
         }
-    }, [inputEmail]);
+    }, [storedEmail, setSignUpData]);
 
     return (
         <div className={styles.stepCtn}>
+            {/* Email Input */}
             <div className={styles.emailInputCtn}>
                 <p className={styles.labelInput}>Email: </p>
                 {inputEmail ? (
@@ -24,27 +25,37 @@ function SignUpStep1({ email }) {
                     <EmptyInput 
                         type="email" 
                         placeholder="Write email..."
-                        value={inputEmail} 
-                        onChange={(e) => setInputEmail(e.target.value)} 
+                        value={signUpData.email} 
+                        onChange={(e) => {
+                            const newEmail = e.target.value;
+                            setSignUpData(prevData => ({ ...prevData, email: newEmail }));
+                        }}
+                        errorMessage={errors.email}
                     />
                 )}
             </div>   
+
+            {/* Password Input */}
             <div className={styles.passwordInputCtn}>
                 <p className={styles.labelInput}>Password: </p>
                 <EmptyInput 
                     type="password" 
                     placeholder="Write password..."
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)} 
+                    value={signUpData.password}
+                    onChange={(e) => setSignUpData(prevData => ({ ...prevData, password: e.target.value }))}
+                    errorMessage={errors.password}
                 />
             </div>
+
+            {/* Confirm Password Input */}
             <div className={styles.confirmPasswordInputCtn}>
                 <p className={styles.labelInput}>Confirm password: </p>
                 <EmptyInput 
                     type="password" 
                     placeholder="Confirm password..."
-                    value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)} 
+                    value={signUpData.confirmPassword}
+                    onChange={(e) => setSignUpData(prevData => ({ ...prevData, confirmPassword: e.target.value }))}
+                    errorMessage={errors.confirmPassword}
                 />
             </div>
         </div>

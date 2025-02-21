@@ -136,14 +136,227 @@ export async function deleteSample(id) {
     }
 }
 
+export async function generateGuestToken(email) {
+    try {
+        const response = await axios.post(`${URL}/guest-token`, { email });
+        if (response.data.guestToken) {
+            localStorage.setItem("guestToken", response.data.guestToken); // Store guest token
+            return response.data; // Return the response with the guestToken
+        }
+        throw new Error("Failed to generate guest token");
+    } catch (error) {
+        console.error("Error generating guest token:", error);
+        throw error;
+    }
+}
+
 export async function createPayment(data) {
     try {
-        const response = await axios.post(`${URL}/checkout-session`, data);
+        let token = localStorage.getItem("userToken");  // Check if the user is logged in
+        if (!token) {
+            // If there's no userToken, check for guestToken
+            token = localStorage.getItem("guestToken");
+        }
+
+        if (!token) {
+            console.error("Authorization token is missing (userToken or guestToken)");
+            return;
+        }
+
+        const response = await axios.post(
+            `${URL}/checkout-session`,
+            data,
+            {
+                headers: {
+                    "Authorization": `Bearer ${token}`, // Send the token in the Authorization header
+                }
+            }
+        );
 
         if (response.data.url) {
-            window.location.href = response.data.url; // Redirect to Stripe Checkout
+            window.location.href = response.data.url;  // Redirect to Stripe Checkout
+        } else {
+            console.error("Payment session creation failed");
         }
     } catch (error) {
         console.error("Payment Error:", error);
+        if (error.response) {
+            console.error("Error Response Data:", error.response.data);  // Log the error response data
+        }
+    }
+}
+
+// sign up
+export async function createUser(userData) {
+    try {
+        const response = await axios.post(`${URL}/sign-up`, userData);
+        if (response.data.token) {
+            localStorage.setItem("userToken", response.data.token);
+            return response.data;  // Return user data or token
+        }
+        throw new Error("Token not received");
+    } catch (error) {
+        console.error("Error creating user:", error);
+        throw error; // Rethrow to handle errors in SignUp component
+    }
+}
+
+
+// sign up with guest's order
+export async function registerUserAndConvertGuestOrders(signUpData) {
+    const guestToken = localStorage.getItem('guestToken'); // Get the guestToken (if exists)
+
+    // If no guestToken is found, there's nothing to convert, return early
+    if (!guestToken) {
+        console.log("No guest token found, skipping order conversion.");
+        return;
+    }
+
+    const requestData = {
+        guestToken,
+        userData: signUpData,
+    };
+    console.log("Request payload for guest order conversion:", requestData);
+
+    try {
+        // Step 1: If user isn't registered yet, we need to register
+        let response;
+        const userToken = localStorage.getItem('userToken');
+        if (!userToken) {
+            // User is not signed up yet, proceed to register
+            response = await createUser(signUpData); // Register the user
+            console.log("User registration response:", response);
+
+            // After registration, store the user's token
+            localStorage.setItem("userToken", response.token); // Store the new user's auth token
+        } else {
+            // User is already signed up, use the existing userToken
+            response = { token: userToken }; // Use the existing token
+            console.log("User already registered, using existing token:", response);
+        }
+
+        // Step 2: After registration (or if already registered), convert guest orders to user orders
+        // Call the backend to convert guest orders to user orders
+        const convertResponse = await axios.post(
+            `${URL}/convert-guest-orders`,  // Backend route to convert orders
+            { guestToken },  // Pass the guestToken in the body
+            {
+                headers: {
+                    'Authorization': `Bearer ${response.token}`, // Send the user's token
+                },
+            }
+        );
+        console.log("Guest orders converted successfully:", convertResponse);
+
+        // Remove the guestToken after conversion and successful registration
+        localStorage.removeItem("guestToken");
+
+        return response; // Return the user data (with token) after successful registration and order conversion
+    } catch (error) {
+        console.error("Error during registration and guest order conversion:", error);
+        throw error; // Rethrow error for handling in the calling function
+    }
+}
+
+// Sign in
+export async function loginUser(email, password) {
+    const response = await fetch(`${URL}/sign-in`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+    });
+
+    if (!response.ok) {
+        const errorData = await response.json();
+
+        if (response.status === 404) {
+            throw new Error('User does not exist. Please sign up.');
+        }
+
+        throw new Error(errorData.message || 'Failed to login');
+    }
+
+    const data = await response.json();  // User data and token
+
+    return data;  // Return user data and token if successful
+}
+
+export async function getUser() {
+    const token = localStorage.getItem("userToken"); 
+    if (!token) {
+        console.error('No token found');
+        return;
+    }
+    try {
+        const response = await fetch(`${URL}/user`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}` 
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to fetch user information');
+        }
+
+        const data = await response.json();
+        
+        return data.user;
+    } catch (err) {
+        console.error('Error:', err.message);  // Handle errors
+    }
+}
+
+// Logout user
+export async function logoutUser() {
+    const token = localStorage.getItem("userToken");
+
+    if (!token) {
+        console.log("User is already logged out.");
+        return; 
+    }
+
+    try {
+        const response = await axios.post(`${URL}/logout`, {}, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+
+        if (response.status === 200) {
+            console.log("Logged out successfully.");
+            localStorage.removeItem("userToken");
+        } else {
+            throw new Error("Failed to logout.");
+        }
+    } catch (error) {
+        console.error("Error logging out:", error);
+        localStorage.removeItem("userToken");
+    }
+}
+
+export async function getUserOrders() {
+    const token = localStorage.getItem("userToken"); // ✅ Retrieve token
+
+    if (!token) {
+        throw new Error("User is not authenticated.");
+    }
+
+    try {
+        const response = await axios.get(`${URL}/user-orders`, {
+            headers: {
+                'Authorization': `Bearer ${token}` // ✅ Send token for authentication
+            }
+        });
+
+        if (response.status === 200) {
+            console.log("Orders retrieved:", response.data); // ✅ Debugging
+            return response.data;
+        } else {
+            throw new Error(`Failed to fetch orders: ${response.statusText}`);
+        }
+    } catch (error) {
+        console.error("Error fetching orders:", error);
+        throw error;
     }
 }

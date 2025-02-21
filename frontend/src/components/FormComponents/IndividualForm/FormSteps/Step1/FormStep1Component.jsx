@@ -15,11 +15,12 @@ function FormStep1({ formData, setFormData, errors }) {
             {input.title !== '' && (
               <label htmlFor={`${styles.inputArea}${index}`} className={styles.label}>{input.title}</label>
             )}
-            <DefaultInput
-              {...input}
-              value={formData[input.name]}
-              setFormData={setFormData}
-              errorMessage={errors?.[input.variableName]?.message || errors?.[input.variableName]}
+            <DefaultInput 
+                  {...input} 
+                  formData={formData} 
+                  setFormData={setFormData}
+                  value={formData[input.variableName]}  // Bind the input value to formData
+                  errorMessage={errors?.[input.variableName]?.message || errors?.[input.variableName]}
             />
           </div>
         ))}

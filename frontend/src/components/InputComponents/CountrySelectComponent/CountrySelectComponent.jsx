@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styles from './CountrySelectComponent.module.scss';
+import ErrorInput from '../ErrorInputComponent/ErrorInputComponent';
 
 const flagCDN = 'https://flagcdn.com/w320';
 
@@ -31,9 +32,9 @@ const Placeholder = ({ placeholder, flag, onClick, isOpen }) => {
   );
 };
 
-function CountrySelect() {
+function CountrySelect({ onChange, value, errorMessage }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedCountry, setSelectedCountry] = useState('Choose a country');
+  const [selectedCountry, setSelectedCountry] = useState(value || 'Choose a country');
   const [selectedFlag, setSelectedFlag] = useState(null);
   const [countries, setCountries] = useState([]);
 
@@ -56,7 +57,6 @@ function CountrySelect() {
       .catch(error => console.error('Error fetching countries:', error));
   }, []);
 
-
   const toggleOptions = () => {
     setIsOpen(!isOpen); 
   };
@@ -65,10 +65,12 @@ function CountrySelect() {
     setSelectedCountry(countryName); 
     setSelectedFlag(countryFlag); 
     setIsOpen(false); 
+    onChange(countryName);  // Notify parent component about the selection
   };
 
   return (
-    <div>
+    <>
+      <div className={styles.countriesSelector}>
       <Placeholder
         placeholder={selectedCountry}
         flag={selectedFlag}
@@ -81,6 +83,8 @@ function CountrySelect() {
         ))}
       </div>
     </div>
+    {errorMessage && <ErrorInput errorMessage={errorMessage} />} {/* Display error message */}
+    </>
   );
 }
 

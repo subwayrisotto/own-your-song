@@ -6,7 +6,6 @@ import CardOpinionComponent from '../CardOpinionComponent/CardOpinionComponent';
 
 function SliderComponent(props) {
     const sliderItems = Object.values(props);
-    console.log(sliderItems);
 
     var settings = {
         className: "center",

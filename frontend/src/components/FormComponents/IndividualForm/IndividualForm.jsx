@@ -5,13 +5,14 @@ import FormStep3 from './FormSteps/Step3/FormStep3Component';
 import FormStep4 from './FormSteps/Step4/FormStep4Component';
 import FormStep5 from './FormSteps/Step5/FormStep5Component';
 import styles from './IndividualForm.module.scss';
-import { createPayment, getSubs } from '../../../api';
+import { createPayment, getSubs, generateGuestToken, createUserFromGuest  } from '../../../api';
 import { useSearchParams } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleCheck } from '@fortawesome/free-regular-svg-icons';
 import { getFormSchema } from '../../../schemas/formSchema';
 import OrderSummary from './FormSteps/OrderSummary/OrderSummary';
 import Checkout from './FormSteps/Checkout/Checkout';
+import { useUser } from '../../../context/UserContext';
 
 function Individual() { 
   const [searchParams, setSearchParams] = useSearchParams();
@@ -20,33 +21,38 @@ function Individual() {
   const maxStep = 7;
   const stepsArray = Array.from({ length: maxStep }, (_, index) => index + 1);
 
+  const {currentUser} = useUser();
+
   const [plans, setPlans] = useState([]);
   const [currentPlan, setCurrentPlan] = useState(searchParams.get("plan") || '');  
   const [errors, setErrors] = useState({});
 
   const [formData, setFormData] = useState(() => {
     const savedFormData = sessionStorage.getItem("formData");
-    return savedFormData ? JSON.parse(savedFormData) : {
-      funnyStory: '',
-      characterTraits: '',
-      hobbies: '',
-      email: '',
-      name: '',
-      recipient: '',
-      recipientRole: '',
-      songMood: '',
-      songStyle: '',
-      songTempo: '',
-      instruments: '', 
-      story: '',
-      dateDelivery: '',
-      rushDeliveryFee: ''
-    };
+    return savedFormData
+    ? JSON.parse(savedFormData)
+    : {
+        funnyStory: '',
+        characterTraits: '',
+        hobbies: '',
+        name: currentUser?.fullName || '',  // Set name based on currentUser or fallback to empty string
+        recipient: '',
+        recipientRole: '',
+        songMood: '',
+        songStyle: '',
+        songTempo: '',
+        instruments: '',
+        story: '',
+        dateDelivery: '',
+        rushDeliveryFee: '',
+        email: currentUser ? currentUser.email : '',
+        confirmEmail: currentUser?.email || ''
+      };
   });
 
   useEffect(() => {
     sessionStorage.setItem("formData", JSON.stringify(formData));
-  }, [formData]); 
+  }, [formData]);
 
   useEffect(() => {
     if (plans.length > 0 && currentPlan) {
@@ -123,32 +129,57 @@ function Individual() {
     const planPrice = selectedPlanInfo?.price || 0;
     const totalAmount = (planPrice + (cartData.rushDeliveryFee || 0)) * 100;
 
-    await createPayment({
-      totalAmount,
-      email: cartData.email,
-      name: cartData.name,
-      formData: JSON.stringify(cartData)
-    });
+    let guestToken = null;  
 
-  //   await savePaymentAndOrderToDb({
-  //     cartData: {
-  //         formData: JSON.stringify(cartData) // Ensure this is a string if needed
-  //     }
-  // });  
-  }
+    if (!currentUser) {  
+        // Only handle guest logic if there's no logged-in user
+        guestToken = localStorage.getItem("guestToken");
+
+        if (!guestToken) {
+            const tokenResponse = await generateGuestToken(cartData.email);
+            guestToken = tokenResponse.guestToken;
+            localStorage.setItem("guestToken", guestToken);
+        }
+    }
+
+    console.log("Using guestToken:", guestToken);  // Debugging
+
+    // Proceed to create payment session, only passing guestToken if applicable
+    await createPayment({
+        totalAmount,
+        email: cartData.email,
+        name: cartData.name,
+        formData: JSON.stringify(cartData),
+        ...(guestToken && { guestToken }) // Only include guestToken if it exists
+    });
+}
   
   const handleNext = async () => {
     const isValid = await handleSubmit(); 
-    if (isValid) {
-      setErrors({});
-      if (step === maxStep - 1) {
-        sessionStorage.setItem("formData", JSON.stringify(formData));
-      }
-      if(step === maxStep){
+    if (!isValid) return; // Stop if validation fails
+  
+    // Allow next step if confirmEmail is either missing or matches email
+    if (!formData.confirmEmail || formData.email === formData.confirmEmail) {
+      sessionStorage.setItem("formData", JSON.stringify(formData));
+  
+      // Clear confirmEmail errors
+      setErrors((prevErrors) => {
+        const { confirmEmail, ...rest } = prevErrors;
+        return rest;
+      });
+  
+      // Move to next step
+      if (step === maxStep) {
         handleCheckout();
       }
+  
       setStep((prevStep) => Math.min(prevStep + 1, maxStep));
-      updateStepInUrl(step);  // Update step in URL
+      updateStepInUrl(step); 
+    } else {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        confirmEmail: 'Email addresses must match'
+      }));
     }
   };
   

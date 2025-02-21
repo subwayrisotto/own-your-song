@@ -1,0 +1,63 @@
+@use "../../styles/mixins.scss";
+@import "../../styles/colors.scss";
+
+.ordersCtn {
+    width: 100%;
+    overflow-x: auto;
+    margin: 20px 0;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px); // Glassmorphism effect
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+  .ordersTable {
+    width: 100%;
+    border-collapse: collapse;
+    background: rgba(20, 20, 20, 0.9);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  
+  thead {
+    background: $color-purple;
+    color: white;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+  
+  .orderTh, .orderTd {
+    padding: 14px;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  .orderTr:nth-child(even) {
+    background: rgba(255, 255, 255, 0.05);
+  }
+  
+  .orderTr:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transition: 0.3s ease-in-out;
+  }
+  
+  .orderTd {
+    font-size: 14px;
+    color: #ddd;
+  }
+  
+  .noOrders {
+    text-align: center;
+    padding: 20px;
+    font-weight: bold;
+    color: $color-purple;
+  }
+  
+  // Responsive design
+  @media (max-width: 768px) {
+    .orderTh, .orderTd {
+      font-size: 12px;
+      padding: 10px;
+    }
+  }

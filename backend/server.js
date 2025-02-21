@@ -5,6 +5,8 @@ const hello = require("./api/hello");
 const subs = require("./routes/subscriptions");
 const samples = require("./routes/samples");
 const payment = require("./routes/stripe");
+const orders = require('./routes/orders');
+const createUser = require('./routes/users');
 
 const app = express();
 const PORT = process.env.PORT || 5050;
@@ -18,23 +20,21 @@ app.use(express.json());
 app.use(subs);
 app.use(samples);
 app.use(payment);
+app.use(orders);
+app.use(createUser)
 
-// Root route
 app.get("/", hello);
 
-// Centralized error handling
 app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).json({ message: "An internal server error occurred." });
 });
 
-// Database connection
 (async () => {
     try {
-        await connect.connectToServer(); // Mongoose connection
-        console.log("✅ Successfully connected to the database");
+        await connect.connectToServer();
+        console.log("✅ Successfully connected to the database | server.js");
 
-        // Start the server after successful DB connection
         app.listen(PORT, () => {
             console.log(`🚀 Server is running on port ${PORT}`);
         });

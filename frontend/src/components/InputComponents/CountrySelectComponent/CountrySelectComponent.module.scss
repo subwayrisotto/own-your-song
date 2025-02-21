@@ -90,6 +90,11 @@
     align-items: center;
     transition: transform 0.3s ease;
     cursor: pointer;
+    transition: transform 0.3s ease, background 0.3s ease;
+
+    &:hover {
+      background: rgba(217, 217, 217, 0.5);
+    }
   
     .arrow {
       transition: transform 0.3s ease;

@@ -19,6 +19,10 @@ export const getFormSchema = (currentPlan) => [
     email: Yup.string()
       .email("Invalid email address")
       .required("Email is required"),
+    confirmEmail: Yup.string()
+      .email("Invalid email address")
+      .oneOf([Yup.ref('email')], "Email addresses must match") // Ensures email and confirm email match
+      .required("Please confirm your email address"),
     name: Yup.string()
       .min(3, "Name must be at least 3 characters long")
       .max(100, "Name cannot exceed 100 characters")

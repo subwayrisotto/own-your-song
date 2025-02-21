@@ -9,12 +9,11 @@ if (!dbURI) {
 module.exports = {
     connectToServer: async () => {
         try {
-            // Connect to MongoDB with Mongoose
             await mongoose.connect(dbURI);
-            console.log("✅ Successfully connected to MongoDB");
+            console.log("✅ Successfully connected to MongoDB | connect.js");
         } catch (err) {
             console.error("❌ Error connecting to MongoDB:", err);
-            throw err; // Re-throw to handle it in your app logic
+            throw err; 
         }
     },
     getDB: () => mongoose.connection,

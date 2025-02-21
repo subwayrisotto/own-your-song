@@ -103,3 +103,17 @@
         cursor: not-allowed;
     }
 }
+
+.redirectToSignIn{
+    margin-top: 20px;
+    text-align: center;
+
+    .signInLink{
+        font-weight: 500;
+        transition: .3s ease-in;
+
+        &:hover{
+            text-decoration: underline;
+        }
+    }
+}

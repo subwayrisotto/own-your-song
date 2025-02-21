@@ -11,6 +11,16 @@ function NavigationComponents() {
     const navRef = useRef();
     const [isOpen, setIsOpen] = useState(false);
 
+    const [currentUser, setCurrentUser] = useState(() => {
+        try {
+          const storedUser = sessionStorage.getItem('currentUser');
+          return storedUser ? JSON.parse(storedUser) : null;
+        } catch (error) {
+          console.error("Error parsing sessionStorage:", error);
+          return null;
+        }
+    });
+
     const showNavbar = () => {
         if (!isOpen) {
             navRef.current.classList.add(styles.responsiveNavOpen);
