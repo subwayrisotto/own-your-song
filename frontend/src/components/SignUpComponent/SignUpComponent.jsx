@@ -6,6 +6,7 @@ import signUpSchema from '../../schemas/signUpSchema';
 import styles from './SignUpComponent.module.scss';
 import SignUpStep1 from './SignUpStep1/SignUpStep1';
 import SignUpStep2 from './SignUpStep2/SignUpStep2';
+import VinylSpinner from '../VinylLoaderComponent/VinylLoader';
 
 function SignUp() {
     const location = useLocation();
@@ -18,6 +19,8 @@ function SignUp() {
     const stepFromUrl = parseInt(queryParams.get("step")) || 1;
     const [step, setStep] = useState(stepFromUrl);
     const SignUpMaxStep = 2;
+    
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         if (step <= SignUpMaxStep) {
@@ -76,10 +79,12 @@ function SignUp() {
         if (step < SignUpMaxStep) {
             setStep((prevStep) => prevStep + 1); // Move to the next step if it's not the final step
         } else {
+            setLoading(true); // Set loading to true only when at the final step
+    
             try {
                 // Step 1: Register the user (sign-up)
                 const signUpResponse = await createUser(signUpData); // Use your existing createUser function
-                console.log("User registration successful:", signUpResponse)
+                console.log("User registration successful:", signUpResponse);
     
                 // Step 2: Check if there's a guestToken and convert guest orders
                 await registerUserAndConvertGuestOrders(signUpData); // This function now handles the conversion
@@ -90,6 +95,8 @@ function SignUp() {
                 navigate("/dashboard");
             } catch (error) {
                 console.error("Error during registration or guest order conversion:", error);
+            } finally {
+                setLoading(false); // Reset loading after the process completes
             }
         }
     };
@@ -115,23 +122,34 @@ function SignUp() {
     return (
         <div className={styles.container}>
             <div className={styles.ctn}>
-                <div className={styles.signUpBody}>
-                    <p className={styles.headerText}>Sign Up</p>
-                    <form onSubmit={(e) => e.preventDefault()}>
-                        {SignUpStepDisplay()}
-                    </form>
-                    <div className={styles.redirectToSignIn}>
-                        <p>
-                            Already have an account? <Link to="/sign-in" className={styles.signInLink}>Sign in</Link>
-                        </p>
-                    </div>
-                </div>
+                {loading ? (
+                    <VinylSpinner />
+                ) : (
+                    <>
+                        <div className={styles.signUpBody}>
+                            <p className={styles.headerText}>Sign Up</p>
+                            <form onSubmit={(e) => e.preventDefault()}>
+                                {SignUpStepDisplay()}
+                            </form>
+                            <div className={styles.redirectToSignIn}>
+                                <p>
+                                    Already have an account? <Link to="/sign-in" className={styles.signInLink}>Sign in</Link>
+                                </p>
+                            </div>
+                        </div>
 
-                <div className={styles.signUpFooter}>
-                    <button type="button" className={styles.signUpButton} onClick={handleNext}>
-                        <span>{step === SignUpMaxStep ? "Submit" : "Next"}</span>
-                    </button>
-                </div>
+                        <div className={styles.signUpFooter}>
+                            <button
+                                type="button"
+                                className={styles.signUpButton}
+                                onClick={handleNext}
+                                disabled={loading} // Disable the button while loading
+                            >
+                                <span>{step === SignUpMaxStep ? "Submit" : "Next"}</span>
+                            </button>
+                        </div>
+                    </>
+                )}
             </div>
         </div>
     );

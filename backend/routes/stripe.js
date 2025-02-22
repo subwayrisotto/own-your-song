@@ -187,26 +187,6 @@ paymentRoutes.post("/checkout-session", async (req, res) => {
     }
 });
 
-// async function convertGuestOrderToUserOrder(userId, guestToken) {
-//     try {
-//         const orders = await Order.find({ guestToken });
-        
-//         if (!orders.length) {
-//             return { message: "No guest orders found." };
-//         }
-
-//         console.log(orders)
-
-//         // Update each order to link to the new userId
-//         await Order.updateMany({ guestToken }, { $set: { userId, guestToken: null } });
-
-//         return { message: "Guest orders converted successfully." };
-//     } catch (error) {
-//         console.error("Error converting guest orders:", error);
-//         throw new Error("Error converting guest orders to user orders.");
-//     }
-// }
-
 // Webhook endpoint for Stripe
 paymentRoutes.post("/webhook", express.raw({ type: "application/json" }), async (req, res) => {
     const sig = req.headers["stripe-signature"];
