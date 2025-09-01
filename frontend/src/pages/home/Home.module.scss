@@ -1,0 +1,381 @@
+@use "../../styles/mixins.scss";
+@import "../../styles/colors.scss";
+
+.headerText{
+    @include mixins.headerText;
+    text-align: left;
+    text-transform: uppercase;
+    font-family: 'Panton';
+    font-size: 64px;
+    font-weight: 400;
+    line-height: 66.8px;
+
+}
+
+.container{
+    background-color: $color-midnight-violet;
+    width: 100%;
+    padding-bottom: 100px;
+}
+
+.ctn{
+    max-width: 1440px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 200px 10px 10px 10px;
+}
+
+.text{
+    max-width: 600px;
+    width: 100%;
+    font-family: 'Afacad';
+    font-size: 36px;
+    font-weight: 500;
+    line-height: 48px;
+    text-align: left;
+    color: $color-white;
+}
+
+.buttonsContainer{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 30px;
+    margin-top: 30px;
+}
+
+#button{
+    width: 216px;
+    height: 73px;
+    outline: none;
+    border-radius: 32px;
+    border: 1px solid $color-purple;
+    background-color: transparent;
+    cursor: pointer;
+
+    &.filledButton{
+        background: linear-gradient(90deg, #850AD6 2.09%, #560BAD 99.79%);
+        backdrop-filter: blur(18.53333282470703px);
+        box-shadow: -9.27px 9.27px 9.27px -5px rgba(255, 255, 255, 0.1), 0px 0px 8px 1px rgba(86, 11, 173, 1);
+        transition: transform .5s ease-out;
+
+        &:hover{
+            background: transparent;
+            backdrop-filter: blur(0);
+            box-shadow: none;
+            transform: scale(.9);
+        }
+    }
+
+    &.outlinedButton{
+        transition: transform .5s ease-out;
+
+        &:hover{
+            background: linear-gradient(90deg, #850AD6 2.09%, #560BAD 99.79%);
+            backdrop-filter: blur(18.53333282470703px);
+            box-shadow: -9.27px 9.27px 9.27px -5px rgba(255, 255, 255, 0.1), 0px 0px 8px 1px rgba(86, 11, 173, 1);
+            transform: scale(.9);
+        }
+    }
+
+    .buttonText{
+        font-family: 'Inter';
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 23px;
+        text-align: center;
+        background: linear-gradient(180deg, #FFFFFF 0%, #999999 96.11%);
+        -webkit-background-clip: text; 
+        background-clip: text; 
+        color: transparent; 
+    }
+}
+
+.welcomeCtn, .samplesCtn, .getInTouchCtn, .subscriptionCtn{
+    max-width: 1158px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.samplesCtn{
+    padding-top: 70px;
+    .headerText{
+        text-align: center;
+    }
+}
+
+.samplesContent{
+    padding-top: 70px;
+    display: flex;
+    justify-content: center;
+    gap: 94px;
+    flex-wrap: wrap;
+}
+
+.samplesList{
+    list-style-type: none;
+    max-width: 346px;
+    width: 100%;
+    height: 425px;
+    overflow-y: scroll;
+    padding: 30px;
+    padding-top: 0;
+    background: linear-gradient(180deg, #480CA8 0%, #1C0542 82.5%);
+    box-shadow: 0px 4px 24.3px 0px rgba(0, 0, 0, 0.5) inset;
+    border-radius: 35px;
+    cursor: pointer;
+
+
+    &::-webkit-scrollbar {
+        width: 8px;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+        background-color: $color-magenta;
+        border-radius: 4px; 
+    }
+    
+    &::-webkit-scrollbar-thumb:hover {
+        background-color: $color-pink;
+    }
+}
+
+.samplesListItem{
+    border-bottom: 1px solid rgba(131, 131, 131, 1);
+    padding-left: 25px;
+    padding-top: 25px;
+    transition: background 0.3s linear;
+    cursor: pointer;
+
+    &:first-child{
+        padding-top: 25px;
+    }
+    &:hover{
+        background: $color-magenta;
+    }
+}
+
+.sampleName{
+    font-family: 'Inter';
+    font-size: 12px;
+    font-weight: 400;
+    color: $color-white;
+}
+
+.samplesListItem{
+    &.active{
+        background: $color-magenta; 
+    }
+}
+
+.samplePlayer{
+    max-width: 450px;
+    width: 100%;
+}
+
+.getInTouchCtn{
+    padding-top: 96px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 100px;
+
+    .headerText{
+        font-family: 'Afacad';
+        font-size: 64px;
+        font-weight: 700;
+        line-height: 85.33px;
+        color: $color-white;
+        text-transform: none;
+        padding-bottom: 30px;
+    }
+}
+
+.infoCtn{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+
+    .text{
+        font-family: 'Akatab';
+        font-size: 20px;
+        font-weight: 700;
+        line-height: 27.38px;
+
+        a{
+            transition: color 0.3s linear;
+
+            &:hover{
+                color: #bb86fc;
+            }
+        }
+    }
+
+    padding-bottom: 15px;
+}
+
+.leftCtn{
+    width: 384px;
+}
+
+.mapContainer{
+    width: 426px;
+    height: 286px;
+
+    iframe{
+        width: 100%;
+        height: 100%;
+        border: none;
+    }
+}
+
+.subscriptionCtn{
+    padding-top: 70px;
+
+    .headerText{
+        text-align: center;
+        padding-bottom: 40px;
+    }
+}
+
+.subList{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+// Responsive Design
+@media (max-width: 1024px) {
+    .headerText {
+        font-size: 48px;
+        line-height: 52px;
+    }
+
+    .text {
+        font-size: 28px;
+        line-height: 38px;
+    }
+
+    .buttonsContainer {
+        gap: 20px;
+    }
+
+    #button {
+        width: 180px;
+        height: 65px;
+    }
+
+    .samplesContent {
+        gap: 50px;
+    }
+
+    .samplesList {
+        max-width: 400px;
+        width: 100%;
+        // height: auto;
+    }
+
+    .samplePlayer {
+        max-width: 400px;
+    }
+
+    .getInTouchCtn {
+        gap: 60px;
+    }
+
+    .mapContainer {
+        width: 350px;
+        height: 240px;
+    }
+}
+
+@media (max-width: 870px){
+    .samplesContent{
+        flex-direction: column-reverse;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .headerText {
+        font-size: 36px;
+        line-height: 42px;
+        text-align: center;
+    }
+
+    .text {
+        font-size: 24px;
+        line-height: 32px;
+        text-align: center;
+        max-width: 100%;
+    }
+
+    .buttonsContainer {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .samplesContent {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .getInTouchCtn {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 40px;
+    }
+
+    .subscriptionCtn {
+        padding-top: 120px;
+    }
+
+    .subList {
+        flex-direction: column;
+        gap: 20px;
+    }
+}
+
+@media (max-width: 600px){
+    .ctn{
+        padding-top: 100px;
+    }
+}
+
+@media (max-width: 480px) {
+    .headerText {
+        font-size: 28px;
+        line-height: 34px;
+    }
+
+    .text {
+        font-size: 18px;
+        line-height: 26px;
+    }
+
+    #button {
+        width: 160px;
+        height: 55px;
+    }
+
+    .buttonsContainer {
+        gap: 15px;
+    }
+
+    .samplesCtn {
+        padding-top: 50px;
+    }
+
+    .getInTouchCtn {
+        padding-top: 60px;
+    }
+
+    .subscriptionCtn {
+        padding-top: 40px;
+    }
+}

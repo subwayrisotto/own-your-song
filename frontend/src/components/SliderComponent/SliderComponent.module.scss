@@ -1,0 +1,87 @@
+
+@use "../../styles/mixins.scss";
+@import "../../styles/colors.scss";
+
+.sliderContainer {
+    position: relative;
+    width: 100%;
+    max-width: 1158px; // Adjust width if needed
+    margin: auto;
+    // overflow: hidden;
+}
+
+.sliderWrapper {
+    overflow: hidden;
+    width: 100%;
+}
+
+.wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+.slider {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    gap: 10px;
+}
+
+.slide {
+    flex: 0 0 auto;
+    width: calc((100% - (10px * (3 - 1))) / 3); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.prev,
+.next {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 10px 15px;
+    font-size: 24px;
+    z-index: 10;
+}
+
+.prev { left: 10px; }
+.next { right: 10px; }
+
+.dotsContainer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+    gap: 8px;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    background: linear-gradient(145deg, #6b23a0, #401069);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.dot.active {
+    background: linear-gradient(145deg,$color-pink, $color-magenta);
+    transform: scale(1.2);
+}
+
+@media (max-width: 900px) {
+    .slide { 
+        width: calc((100% - 10px) / 2); // Adjust for 2 slides with a 10px gap
+    }
+}
+
+@media (max-width: 600px) {
+    .slide { 
+        width: 100%; // Full width for single slide
+    }
+}
+

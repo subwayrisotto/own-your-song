@@ -1,0 +1,28 @@
+@use "../../../styles/mixins.scss";
+@import "../../../styles/colors.scss";
+
+.stepCtn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+}
+
+.emailInputCtn, .passwordInputCtn, .confirmPasswordInputCtn{
+    width: 100%;    
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 10px;
+    
+    input{
+        width: 100%;
+    }
+}
+
+.labelInput{
+    font-size: 15px;
+}

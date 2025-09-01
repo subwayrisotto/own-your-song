@@ -1,0 +1,79 @@
+@use "../../../../../styles/mixins.scss";
+@import "../../../../../styles/colors.scss";
+
+.orderSummaryCtn{
+    width: 100%;
+}
+
+.headerText{
+    font-family: 'Inter';
+    font-size: 30.25px;
+    font-weight: 500;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.summaryList{
+    width: 100%;
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start ;
+    flex-direction: column;
+    font-family: 'Inter';
+}
+
+.summaryItem{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: row;
+    gap: 10px;
+    padding: 15px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.52);
+    width: 100%;
+
+    &:last-child{
+        border-bottom: none;
+    }
+}
+
+.title{
+    width: 150px;
+    font-family: 'Inter';
+    font-size: 15px;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.textWrapper {
+    width: 300px;
+}
+
+.priceTitle{
+    font-weight: 600;
+    width: 150px;
+    font-family: 'Inter';
+    font-size: 19px;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.totalPrice{
+    color: rgba(93, 255, 104, 1);
+    font-weight: 600;
+    font-family: 'Inter';
+    font-size: 19px;
+    word-wrap: break-word;  /* Ensures text wraps properly */
+    word-break: break-word; /* Optional: breaks long words if needed */
+    white-space: normal;  
+}
+
+.value {
+    font-family: 'Inter';
+    font-size: 15px;
+    font-weight: 200;
+    color: $color-white;
+    word-wrap: break-word;  /* Ensures text wraps properly */
+    word-break: break-word; /* Optional: breaks long words if needed */
+    white-space: normal;    /* Ensures normal text wrapping behavior */
+}

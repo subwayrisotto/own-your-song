@@ -1,0 +1,72 @@
+
+@import "./mixins.scss";
+@import "./colors.scss";
+@import "./fonts.scss";
+
+*, *::after, *::before{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+a{
+    text-decoration: none;
+    color: $color-white;
+}
+
+.slick-list{
+    padding: 0 66px!important;
+}
+
+.slick-next{
+    right: -40px!important;
+}
+
+.slick-prev{
+    left: -40px!important;
+}
+
+.slick-dots{
+    bottom: -35px!important;
+    li{
+        button{
+            &:before{
+                content: ''!important;
+                color: $color-white!important;
+            }
+            width: 10px!important;
+            height: 10px!important;
+            background-color: $color-white!important;
+            border-radius: 50%;
+        }
+    
+        &.slick-active{
+            button{
+                background-color: $color-pink!important;
+                &:before{
+                    content: ''!important;
+                    color: $color-pink!important;
+                }
+            }
+        }
+    }
+}
+
+.container {
+    background-color: $color-midnight-violet;
+    width: 100%;
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+}
+
+
+.ctn {
+    max-width: 1440px;
+    width: 100%;
+    margin: 0 auto;
+    // padding: 170px 10px 50px 10px; 
+    display: flex;
+    flex-direction: column; 
+    justify-content: center;
+    align-items: center;
+}

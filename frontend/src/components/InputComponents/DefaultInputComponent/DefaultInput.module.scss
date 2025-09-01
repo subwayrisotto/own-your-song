@@ -1,0 +1,29 @@
+.inputWrapper{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.inputArea{
+    width: 100%;
+    padding: 18px 15px;
+    background: rgba(160, 160, 160, 0.29);
+    outline: none;
+    border-radius: 14px;
+    font-size: 15px;
+    border: none;
+    color: #fff;
+
+    &::placeholder, 
+    &::-webkit-input-placeholder,
+    &::-moz-placeholder,
+    &:-ms-input-placeholder,
+    &::-o-placeholder {
+        color: rgba(255, 255, 255, 0.41);
+        font-family: 'Inter';
+    }
+
+    &.errorInput{
+        border: 1px solid red;
+    }
+}

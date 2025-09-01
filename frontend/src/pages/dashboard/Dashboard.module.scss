@@ -1,0 +1,250 @@
+@use "../../styles/mixins.scss";
+@import "../../styles/colors.scss";
+
+.container {
+    background-color: $color-midnight-violet;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    // align-items: center;
+    padding: 200px 20px 50px;
+
+    @media (max-width: 1024px) {
+        padding: 150px 10px 10px;
+    }
+
+    @media (max-width: 600px) {
+        padding: 100px 10px 50px;
+    }
+
+    @media (max-width: 460px) {
+        padding: 100px 10px 50px;
+    }
+}
+
+.ctn {
+    max-width: 1158px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    font-size: 18px;
+    color: $color-white;
+    font-family: 'Inter', sans-serif;
+}
+
+.card {
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(90.88deg, rgba(98, 98, 98, 0.2) 0%, rgba(134, 134, 134, 0.142) 99.91%);
+    backdrop-filter: blur(15px);
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    color: #fff;
+}
+
+.topCtn{
+    width: 100%;
+    border-bottom: 1px solid rgba(86, 87, 122, 1);
+    padding-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.rightUserCtn{
+    color: rgb(143, 143, 143);
+    cursor: pointer;
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: row;
+    gap: 10px;
+
+    & .iconWrapper{
+        width: 25px;
+        height: 25px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &.iconWrapperActive{
+            svg path{
+                fill: $color-white;
+                transition: ease-in .25s;
+            }
+        }
+    }
+
+    & .rotated{
+        transform: rotate(90deg);
+    }
+}
+
+.leftUserCtn{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 15px;
+}
+
+.userTextCtn{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+
+    .fullName{
+        font-family: 'Inter';
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 18px;
+        letter-spacing: 0px;
+    }
+
+    .email{
+        font-family: 'Inter';
+        font-size: 14px;
+        line-height: 18px;
+        letter-spacing: 0px;
+        color: rgba(143, 143, 143, 1);
+    }
+}
+
+.avatar {
+    // margin: 0 auto 15px;
+    border-radius: 50%;
+    overflow: hidden; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.userInfo {
+    width: 100%;
+    h2 {
+        padding: 15px 0;
+        font-family: 'Inter';
+        font-weight: 600;
+        font-size: 32px;
+        line-height: 150%;
+        letter-spacing: 0%;
+        
+    }
+}
+
+.email {
+    font-size: 14px;
+    color: #ccc;
+}
+
+.details {
+    width: 100%;
+    padding: 15px 0;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    .detailsLeftCtn{
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    p {
+        font-size: 20px;
+    }
+}
+
+.ordersCtn {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    width: 100%;
+}
+
+.noOrders {
+    margin: 20px 0;
+    font-size: 24px;
+    font-weight: 600;
+    color: $color-purple;
+}
+
+.logoutBtn {
+    width: 100%;
+    margin-top: 20px;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: $color-purple;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+
+    &:hover {
+        background: #ff4f7b;
+    }
+}
+
+// Responsive Design
+// @media (max-width: 1024px) {
+//     .ctn {
+//         max-width: 90%;
+//     }
+//     // .card {
+//     //     max-width: 400px;
+//     // }
+// }
+
+.defaultDashboard{
+    margin-top: 25px;
+    width: 100%;
+
+    svg path{
+        fill:rgb(143, 143, 143)
+    }
+}
+
+.buttonsCtn{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    margin-top: 25px;
+}
+
+@media (max-width: 768px) {
+
+    .ctn {
+        font-size: 16px;
+    }
+    .card {
+        max-width: 100%;
+    }
+    .logoutBtn {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .card {
+        padding: 20px;
+    }
+    .userInfo h2 {
+        font-size: 20px;
+    }
+    .details p {
+        font-size: 12px;
+    }
+    .logoutBtn {
+        padding: 10px;
+        font-size: 14px;
+    }
+}

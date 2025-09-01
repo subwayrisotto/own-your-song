@@ -1,0 +1,70 @@
+.stepCtn{
+    padding-top: 30px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    // width: 500px;
+}
+
+.headerText{
+    font-family: 'Inter';
+    font-size: 22px;
+    font-weight: 400;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.subHeaderText{
+    font-family: 'Inter';
+    font-size: 14px;
+    text-align: left;
+    color: rgba(255, 255, 255, 0.41);
+    margin-bottom: 30px;
+}
+
+.inputsCtn{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.inputData{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+}
+
+.label{
+    font-family: 'Inter';
+    font-size: 15px;
+    color: #fff;
+}
+
+.inputArea{
+    width: 100%;
+    padding: 18px 15px;
+    background: rgba(160, 160, 160, 0.29);
+    outline: none;
+    border-radius: 14px;
+    font-size: 14px;
+    border: none;
+    color: #fff;
+    overflow: hidden;
+
+    &::placeholder, 
+    &::-webkit-input-placeholder,
+    &::-moz-placeholder,
+    &:-ms-input-placeholder,
+    &::-o-placeholder {
+        color: rgba(255, 255, 255, 0.41);
+        font-family: 'Inter';
+    }
+}

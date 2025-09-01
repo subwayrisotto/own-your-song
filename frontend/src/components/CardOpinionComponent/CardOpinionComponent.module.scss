@@ -1,0 +1,57 @@
+
+@use "../../styles/mixins.scss";
+@import "../../styles/colors.scss";
+
+.card{
+  // width: 188px;
+  width: 420px;
+  height: 200px;
+  // height: 188px;
+  aspect-ratio: 1 / 1;
+  background: linear-gradient(145deg, #6b23a0, #401069);
+  border-radius: 25px;
+  // box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5); 
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  padding: 11px 15px;
+}
+
+.avatar{
+  width: 56px;
+  height: 56px;
+}
+
+.comment{
+  font-family: 'Inter';
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 16.29px;
+  text-align: center;
+  color: $color-white;
+  margin-top: 10px;
+}
+
+.name{
+  margin-top: 8px;
+  font-family: 'Inter';
+  font-size: 23px;
+  font-weight: 800;
+  line-height: 14.7px;
+  text-align: center;
+  color: $color-white;
+}
+
+.ratingCtn{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1px;
+
+  img{
+    width: 15px;
+    height: auto;
+  }
+}

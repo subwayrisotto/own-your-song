@@ -1,0 +1,64 @@
+@use "../../styles/mixins.scss";
+@import "../../styles/colors.scss";
+
+.chartContainer{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.timeframeButtons{
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    gap: 20px;
+
+    a{
+        cursor: pointer;
+        display: inline-block;
+        position: relative;
+    
+        &:hover{
+          color: rgba(209, 79, 169, 1);
+          ;
+        }
+    
+        &::after{
+          content: '';
+          position: absolute;
+          width: 100%;
+          transform: scaleX(0);
+          height: 2px;
+          bottom: -2px ;
+          left: 0;
+          background-color: rgba(209, 79, 169, 1);
+          transform-origin: bottom right;
+          transition: transform .25s ease-out;
+        }
+    
+        &:hover::after{
+          transform: scaleX(1);
+          transform-origin: bottom left;
+        }
+
+        &.active{
+            color: rgba(209, 79, 169, 1);
+  
+            &::after{
+              content: '';
+              position: absolute;
+              width: 100%;
+              transform: scaleX(1);
+              height: 2px;
+              bottom: -2px ;
+              left: 0;
+              background-color: rgba(209, 79, 169, 1);
+              transform-origin: bottom left;
+              transition: transform .25s ease-out;
+            }
+        }
+      }
+}

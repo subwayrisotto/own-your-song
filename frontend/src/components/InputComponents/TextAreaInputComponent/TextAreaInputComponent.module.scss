@@ -1,0 +1,67 @@
+@use "../../../styles/mixins.scss";
+@import "../../../styles/colors.scss";
+
+.textarea{
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.textareaInput {
+    width: 100%;
+    resize: none;
+    outline: none;
+    padding: 20px;
+    background: rgba(160, 160, 160, 0.29);
+    border-radius: 14px;
+    font-size: 15px;
+    border: none;
+    color: #fff;
+    font-family: 'Inter';
+
+    &.errorInput{
+        border: 1px solid red;
+    }
+
+    /* Enable vertical scrolling */
+    overflow-y: auto;  /* Allows scrolling when the content overflows vertically */
+
+    &::placeholder, 
+    &::-webkit-input-placeholder,
+    &::-moz-placeholder,
+    &:-ms-input-placeholder,
+    &::-o-placeholder {
+        color: rgba(255, 255, 255, 0.41);
+        font-family: 'Inter';
+    }
+
+    &::-webkit-scrollbar {
+        width: 8px;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+        background-color: $color-pink;
+        border-radius: 4px; 
+    }
+    
+    &::-webkit-scrollbar-thumb:hover {
+        background-color: $color-magenta;
+        cursor: pointer;
+    }
+}
+
+
+.textLength{
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    z-index: 1;
+    color: rgba(255, 255, 255, 0.41);
+    font-family: 'Inter';
+}
+
+.errorCtn{
+    position: absolute;
+    bottom: -20px;
+    left: 0px;
+}

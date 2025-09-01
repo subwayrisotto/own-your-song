@@ -1,0 +1,175 @@
+@use "../../../styles/mixins.scss";
+@import "../../../styles/colors.scss";
+
+.individualForm {
+    color: $color-white;
+    margin-top: 50px;
+    position: relative;
+    
+    @media (max-width: 768px) {
+        margin-top: 30px;
+    }
+
+    @media (max-width: 600px) {
+        margin-top: 0px;
+    }
+}
+
+.imagesCtn {
+    z-index: 1;
+}
+
+.img1 {
+    position: absolute;
+    bottom: -50%;
+    right: -50%;
+    transform: translate(-50%, -50%) scale(1.25);
+    
+    @media (max-width: 768px) {
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+.img2 {
+    position: absolute;
+    transform: translate(-50%, -50%) scale(0.6);
+    
+    @media (max-width: 768px) {
+        transform: translate(-50%, -50%) scale(0.5);
+    }
+}
+
+.ctn {
+    position: relative;
+    z-index: 2;
+}
+
+
+.body {
+    aspect-ratio: 1 / 1;
+    padding: 25px 30px;
+    background: linear-gradient(135.02deg, rgba(217, 217, 217, 0.23) 0.65%, rgba(115, 115, 115, 0.23) 100.67%);
+    backdrop-filter: blur(11.9px);
+    box-shadow: 0px 4px 8.9px 2px rgba(0, 0, 0, 0.29);
+    border-radius: 19px;
+    // z-index: 2;
+    width: 500px;
+    
+    @media (max-width: 510px) {
+        width: 100%;
+        padding: 20px;
+    }
+}
+
+.footer {
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    flex-wrap: wrap;
+
+    @media (max-width: 600px) {
+        margin-top: 25px;
+    }
+}
+
+.formButton {
+    width: 140px;
+    aspect-ratio: 2 / 1;
+    cursor: pointer;
+    border-radius: 35px;
+    background: linear-gradient(180deg, rgba(217, 217, 217, 0.25) 0%, rgba(115, 115, 115, 0.08) 100%);
+    position: relative;
+    overflow: hidden;
+    border: none;
+    outline: none;
+    color: white;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.4s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.4s ease-in-out;
+
+    &:hover {
+        background-color: rgba(164, 155, 175, 0.5);
+        box-shadow: inset 0px 0px 1.6px 1.2px rgba(255, 255, 255, 0.25), 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+        transform: scale(1.05);
+    }
+    
+    @media (max-width: 768px) {
+        width: 120px;
+        font-size: 14px;
+    }
+}
+
+.planList{
+    list-style-type: none;
+    display: flex;
+    justify-content:flex-end;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.planListItem{
+    font-family: 'Inter';
+    font-size: 15px;
+    font-weight: 400;
+    text-align: left;
+    color: rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+    transition: .25s linear;
+
+    &.active{
+        color: rgba(255, 255, 255, 1);
+    }
+
+    &:hover{
+        color: rgba(255, 255, 255, 1);
+    }
+
+    position: relative;
+}
+
+.planName:hover + .benefits{
+    display: block;
+}
+
+.benefits{
+    display: none;
+    position: absolute;
+    background: linear-gradient(135.02deg, rgba(217, 217, 217, .8) 0.65%, rgba(115, 115, 115, 1) 100.67%);
+    backdrop-filter: blur(11.9px);
+    box-shadow: 0px 4px 8.9px 2px rgba(0, 0, 0, 0.29);
+    width: 155px;
+    height: auto;
+    font-size: 12px;
+    border-radius: 15px;
+    padding: 10px;
+    z-index: 100;
+
+    @media (max-width: 676px){
+        right: 0;   
+    }
+}
+
+.benefit{
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 5px;
+}
+
+
+.formContainer{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}

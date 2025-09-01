@@ -1,0 +1,104 @@
+.calendar {
+    width: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 50px auto;
+    text-align: center;
+  }
+  
+  .calendarGrid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+  }
+  
+  .calendarCell {
+    width: 60px;
+    height: 60px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    overflow: hidden;
+    font-size: 14px;
+  }
+
+  .calendarHeader{
+    width: 60px;
+    height: 60px;
+    padding: 5px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .calendarHeader {
+    font-weight: bold;
+  }
+  
+  .event {
+    background: #7abaff;
+    margin-top: 4px;
+    font-size: 10px;
+    padding: 2px;
+    border-radius: 3px;
+    text-align: center;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  
+  .eventForm {
+    margin-top: 20px;
+  }
+  
+  .empty {
+    background: rgb(35, 18, 63);
+    border: 1px solid rgb(35, 18, 63);
+  }
+
+  
+
+  .today .dayNumber{
+    background: linear-gradient(93.21deg, #850AD6 22.67%, #D14FA9 115.84%);
+    font-weight: bold;
+    border-radius: 50%;
+    padding: 5px;
+  }
+
+  @media (max-width: 768px) {
+    .calendarGrid {
+      grid-template-columns: repeat(7, 1fr);
+    }
+  
+    .calendarCell {
+      padding: 0.5rem;
+      font-size: 0.8rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .calendarGrid {
+      grid-template-columns: repeat(5, 1fr);
+    }
+  
+    .calendarHeader {
+      display: none;
+    }
+  
+    .calendarCell {
+      font-size: 0.7rem;
+    }
+  
+    .eventForm input {
+      width: 100%;
+    }
+  }

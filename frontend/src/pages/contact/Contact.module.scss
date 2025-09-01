@@ -1,0 +1,23 @@
+@use "../../styles/mixins.scss";
+@import "../../styles/colors.scss";
+
+.container{
+    background-color: $color-midnight-violet;
+    width: 100%;
+    padding-bottom: 100px;
+}
+
+.ctn{
+    max-width: 1440px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 200px 10px 10px 10px;
+
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+    color: $color-white;
+    font-family: 'Inter';
+}

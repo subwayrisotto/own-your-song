@@ -1,0 +1,110 @@
+@use "../../styles/mixins.scss";
+@import "../../styles/colors.scss";
+
+.stepperContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 50px;
+    flex-wrap: wrap;
+    max-width: 500px;
+    width: 100%;
+    
+    @media (max-width: 768px) {
+        margin-bottom: 30px;
+    }
+
+    @media (max-width: 600px) {
+        margin-bottom: 25px;
+    }
+}
+
+.hiddenStep{
+    visibility: hidden;
+    display: none;
+    opacity: 0;
+}
+
+.step {
+    display: flex;
+    align-items: center; // aligns circle and line vertically
+    position: relative;
+  }
+
+.step[data-active="true"] .circle {
+    background-color: $color-pink;
+    color: $color-white;
+    transition: .25s ease;
+}
+
+.circle {
+    width: 40px;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $color-purple;
+    color: $color-white;
+    font-weight: bold;
+    font-family: 'Inter';
+    font-size: 15px;
+    font-weight: 400;
+    
+    @media (max-width: 768px) {
+        width: 30px;
+        font-size: 12px;
+    }
+}
+
+.linesWrapper{
+    position: relative;
+}
+
+.line {
+    flex: 1;
+    height: 2px;
+    background-color: $color-purple;
+    width: 75px;
+    transition: .25s ease;
+    
+    @media (max-width: 768px) {
+        width: 50px;
+    }
+}
+
+.lineActive{
+    position: absolute;
+    top: 0;
+    flex: 1;
+    height: 2px;
+    background-color:  $color-pink;;
+    // padding: 0 95px;
+    // width: 190px;
+    width: 0;
+    transition: .25s ease;
+
+    &.active{
+        width: 75px;
+
+        @media (max-width: 768px) {
+            width: 50px;
+        }
+    }
+}
+
+.stepText{
+    font-family: 'Inter';
+    font-size: 16px;
+    font-weight: 600;
+}
+
+
+.mobileSteps{
+    padding: 10px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $color-purple;
+    border-radius: 20px;
+}

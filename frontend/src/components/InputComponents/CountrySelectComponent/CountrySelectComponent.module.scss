@@ -1,0 +1,123 @@
+@use "../../../styles/mixins.scss";
+@import "../../../styles/colors.scss";
+
+.selectCountryCtn{
+    width: 100%;
+}
+
+.placeholderText{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 25px;
+}
+
+.selectOption{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 25px;
+
+    width: 100%;
+    background: rgba(160, 160, 160, 0.29);
+    padding: 18px 15px;
+    font-size: 15px;
+    color: #fff;
+    font-family: 'Inter';
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom: 1px solid rgba(217, 217, 217, 0.5);
+    position: relative;
+    z-index: 1;
+    border: none;
+    transition: transform 0.3s ease; 
+    cursor: pointer;
+
+    transform: translateY(0); 
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom: 1px solid rgba(217, 217, 217, 0.5);
+
+    &:hover{
+        background: rgba(217, 217, 217, 0.5);
+    }
+    
+    &:last-child {
+        border-bottom-left-radius: 14px;
+        border-bottom-right-radius: 14px;
+        border-bottom: 0;
+    }
+}
+
+.flagImage {
+    width: 25px;
+    height: 25px;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;  
+    object-fit: cover;   
+    object-position: center;
+}
+
+.optionsCtn {
+    max-height: 0;  // Initially set max-height to 0 (closed state)
+    overflow-y: hidden; // Hide overflow when closed
+    transition: max-height 0.3s ease-in-out; // Animate max-height
+    border-bottom-left-radius: 14px;
+    border-bottom-right-radius: 14px;
+    border-bottom: 0;
+    cursor: pointer;
+  
+    &.open {
+      max-height: 400px; // Set a max-height large enough for your content (or use a specific value)
+      overflow-y: auto; // Enable scrolling once content exceeds the container's height
+    }
+  }
+  
+  
+  .selectPlaceholder {
+    width: 100%;
+    background: rgba(160, 160, 160, 0.29);
+    border-radius: 14px;
+    padding: 18px 15px;
+    font-size: 15px;
+    color: #fff;
+    font-family: 'Inter';
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+    transition: transform 0.3s ease, background 0.3s ease;
+
+    &:hover {
+      background: rgba(217, 217, 217, 0.5);
+    }
+  
+    .arrow {
+      transition: transform 0.3s ease;
+      cursor: pointer;
+  
+      &.rotated {
+        transform: rotate(180deg); 
+      }
+    }
+    &.open {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+      border-bottom: 1px solid rgba(217, 217, 217, 0.5); 
+    }
+  }
+  
+  
+  .arrow {
+    transition: transform 0.3s ease;
+    cursor: pointer;
+  
+    &.rotated {
+      transform: rotate(180deg);
+    }
+  }
+  

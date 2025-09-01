@@ -1,0 +1,170 @@
+@use "../../styles/mixins.scss";
+@import "../../styles/colors.scss";
+
+.headerText{
+    @include mixins.headerText;
+}
+
+.container{
+    background-image: url('../../assets/about-us/bg.png');
+    background-size: 100% 100%; 
+    background-position: center center; 
+    background-repeat: no-repeat; 
+    width: 100%;
+    padding-bottom: 100px;
+    overflow-x: hidden;
+}
+
+.ctn{
+    max-width: 1440px;
+    width: 100%;
+    margin: 0 auto;
+    // padding-top: 200px;
+    padding: 200px 10px 10px 10px;
+}
+
+.textContent{
+    @include mixins.textStyling;
+    max-width: 774px;
+    margin: 0 auto;
+    text-align: center;
+    padding-top: 71px;
+}
+
+.paddingTop{
+    padding-top: 70px;
+}
+
+.achievementsCtn, .coreValuesCtn, .ourSquadCtn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.coreValuesCtn{
+    gap: 16px;
+}
+
+.ourSquadCtn{
+    gap: 20px;
+}
+
+.creativeProcess{
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+.processPathContainer{
+    width: 100%;
+    height: auto;
+    position: absolute;
+    top: 145px;
+    left: 0;
+}
+
+#verticalLine{
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#horizontalLine{
+    position: absolute;
+    left: 50%;
+}
+
+.horizontalLine1{
+    top: 147px;
+    transform: translateX(-97%);
+}
+
+.horizontalLine2{
+    top: 386px;
+    transform: translateX(0);
+}
+
+.horizontalLine3{
+    top: 640px;
+    transform: translateX(-97%);
+}
+
+.processesList{
+    max-width: 1000px;
+    width: 100%;
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 0;
+}
+
+.processListItem{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &:nth-child(2n){
+        flex-direction: row-reverse;
+    }
+    &:nth-child(2n + 1){
+        flex-direction: row;
+    }
+}
+
+.processTextCtn{
+    max-width: 318px;
+    width: 100%;
+}
+
+.processHeader{
+    font-family: 'Akatab Bold';
+    font-size: 32px;
+    font-weight: 800;
+    line-height: 28.8px;
+    text-align: center;
+    color: $color-white;
+    padding-bottom: 10px;
+}
+
+.processText{
+    font-family: 'Afacad';
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 21.6px;
+    text-align: center;
+    color: $color-white;
+}
+
+.processImage img{
+    height: 360px;
+}
+
+// .clientsOpinionCtn{
+//     display: grid;
+//     justify-content: center;
+//     align-items: center;
+//     grid-template-columns: repeat(3, 188px);
+//     gap: 25px;
+// }
+
+@media screen and (max-width: 600px) {
+    .ctn{
+        padding-top: 140px;
+    }
+
+    .textContent, .paddingTop{
+        padding-top: 55px;
+    }
+
+    .processListItem{
+        &:nth-child(2n+1), &:nth-child(2n){
+            flex-direction: column-reverse;
+        }
+    }
+}

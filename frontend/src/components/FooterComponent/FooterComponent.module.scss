@@ -1,0 +1,121 @@
+@use "../../styles/mixins.scss";
+@import "../../styles/colors.scss";
+
+.footer{
+    width: 100vw;
+    background: rgba(25, 10, 42, 1);
+    color: $color-white;
+}
+
+.container{
+    max-width: 1440px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 30px 0 18px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.footerNavigationCtn{
+    padding-bottom: 16px;
+    // max-width: 340px;
+    width: 100%;
+
+    .navList{
+        list-style-type: none;
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        align-items: center;
+        flex-direction: row;
+        font-family: 'Inter';
+
+        .navListItem{
+            @include mixins.textNavigationStyling;
+            a{
+                cursor: pointer;
+                display: inline-block;
+                position: relative;
+
+                &:hover{
+                    color: $color-pink;
+                }
+
+                &::after{
+                    content: '';
+                    position: absolute;
+                    width: 100%;
+                    transform: scaleX(0);
+                    height: 2px;
+                    bottom: -2px ;
+                    left: 0;
+                    background-color: $color-pink;
+                    transform-origin: bottom right;
+                    transition: transform .25s ease-out;
+                }
+
+                &:hover::after{
+                    transform: scaleX(1);
+                    transform-origin: bottom left;
+                }
+            }
+        }
+    }
+}
+
+.footerSocialMediaCtn{
+    padding-bottom: 21px;
+
+    .navList{
+        list-style-type: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 37px;
+    }
+}
+
+.rightsText{
+    text-align: center;
+    font-family: 'Akatab';
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 27.38px;
+}
+
+.active a{
+    color: $color-pink;
+    
+    &::after{
+      content: '';
+      position: absolute;
+      width: 100%;
+      transform: scaleX(1)!important;
+      height: 2px;
+      bottom: -2px ;
+      left: 0;
+      background-color: $color-pink;
+      transform-origin: bottom left;
+      transition: transform .25s ease-out;
+    }
+}
+
+@media screen and (max-width: 640px) {
+    .footerNavigationCtn{
+        padding-bottom: 45px;
+        .navList{
+            flex-direction: column;
+            gap: 20px;
+        }
+    }
+}
+
+@media screen and (max-width: 300px) {
+    .footerSocialMediaCtn .navList{
+        flex-direction: column;
+        gap: 10px;
+    }
+}
