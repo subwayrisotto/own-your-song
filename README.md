@@ -1,70 +1,36 @@
-# Getting Started with Create React App
+# OYS – Full-Stack Web Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+OYS is a full-stack web application that I independently designed, developed, and deployed from scratch. The project was built using React for the frontend and Node.js for the backend, with Stripe integration for secure online payment processing.
 
-## Available Scripts
+## Project Scope
 
-In the project directory, you can run:
+* Designed and implemented the complete application architecture.
+* Developed a responsive and user-friendly interface using React.
+* Built REST API endpoints and backend business logic with Node.js.
+* Integrated Stripe for secure payment processing and transaction management.
+* Configured the production environment and deployed the application on Vercel.
+* Managed the entire development lifecycle independently, from planning and implementation to deployment and maintenance.
 
-### `npm start`
+## Technologies Used
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+* React
+* JavaScript
+* Node.js
+* REST API
+* Stripe
+* Vercel
+* Git / GitHub
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Current Status
 
-### `npm test`
+⚠️ This project is currently under active development and should be considered a work in progress rather than a final production release.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+I am continuously working on new features, UI/UX improvements, performance optimizations, and backend enhancements. The application is regularly updated as part of its ongoing development.
 
-### `npm run build`
+## Purpose of the Project
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+The goal of this project was to build a complete full-stack application while gaining hands-on experience in application architecture, frontend and backend development, payment system integration, and production deployment.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Live Demo
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+https://oys-six.vercel.app/
